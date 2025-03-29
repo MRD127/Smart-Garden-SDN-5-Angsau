@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    tools:context=".RegisterActivity">
+
+    <!-- Background Shape di Pojok -->
+    <ImageView
+        android:id="@+id/rgsshape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shapes"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        tools:ignore="MissingConstraints" />
+
+    <ImageView
+        android:id="@+id/rgswelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/welcome2"
+        android:layout_below="@id/rgsshape"
+        android:layout_centerHorizontal="true"/>
+
+    <!-- Deskripsi -->
+    <TextView
+        android:id="@+id/rgsdescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bagaimana kamu mengelola tanamanmu?\nJika belum, maka mulailah sekarang."
+        android:textSize="14sp"
+        android:textColor="#555555"
+        android:gravity="center"
+        android:layout_below="@id/rgswelcome"
+        android:layout_marginTop="10dp"/>
+
+
+    <!-- Input Nama Pengguna -->
+    <EditText
+        android:id="@+id/rgsusername"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Nama pengguna"
+        android:background="@drawable/input_rounded"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:layout_below="@id/rgsdescription"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+
+    <EditText
+        android:id="@+id/rgsemail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Alamat email"
+        android:background="@drawable/input_rounded"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:inputType="textEmailAddress"
+        android:layout_below="@id/rgsusername"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+
+    <EditText
+        android:id="@+id/rgspassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Kata sandi"
+        android:background="@drawable/input_rounded"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:layout_below="@id/rgsemail"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:inputType="textPassword"
+        android:drawableEnd="@drawable/eye"
+        />
+
+    <EditText
+        android:id="@+id/rgsconfirm"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Konfirmasi kata sandi"
+        android:background="@drawable/input_rounded"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:inputType="textPassword"
+        android:layout_below="@id/rgspassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:drawableEnd="@drawable/eye"
+        />
+
+    <CheckBox
+        android:id="@+id/rgschk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Saya menerima syarat dan ketentuan"
+        android:layout_below="@id/rgsconfirm"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        />
+
+    <Button
+        android:id="@+id/rgsmasuk"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Daftar"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_below="@id/rgschk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="#37B943"
+        />
+
+    <TextView
+        android:id="@+id/rgsdaftar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sudah punya akun? "
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:layout_below="@id/rgsmasuk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/rgsregister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Masuk"
+        android:textSize="14sp"
+        android:textColor="#0000FF"
+        android:textStyle="bold"
+        android:layout_toEndOf="@id/rgsdaftar"
+        android:layout_alignBaseline="@id/rgsdaftar"
+        android:elevation="1dp"/>
+
+    <ImageView
+        android:id="@+id/rgsshape2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shapes2"
+        android:scaleType="fitXY"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:elevation="-2dp"/>
+
+</RelativeLayout>

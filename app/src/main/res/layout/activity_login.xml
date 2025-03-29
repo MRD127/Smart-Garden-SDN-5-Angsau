@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    tools:context=".LoginActivity">
+
+    <!-- Background Shape di Pojok -->
+    <ImageView
+        android:id="@+id/lgnshape"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shapes"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+
+    <!-- Teks Selamat Datang (Sebagai Gambar) -->
+    <ImageView
+        android:id="@+id/lgnwelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/welcome2"
+        android:layout_below="@id/lgnshape"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Deskripsi -->
+    <TextView
+        android:id="@+id/lgndeskripsi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selamat datang kembali!\nSilakan masuk."
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:gravity="center"
+        android:layout_below="@id/lgnwelcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
+
+    <!-- Logo -->
+    <ImageView
+        android:id="@+id/lgnlogo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo2"
+        android:background="@drawable/green_square"
+        android:layout_below="@id/lgndeskripsi"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"/>
+
+    <!-- Input Username -->
+    <EditText
+        android:id="@+id/lgnusername"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Nama pengguna atau alamat email"
+        android:background="@drawable/input_rounded"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:layout_below="@id/lgnlogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"/>
+
+    <!-- Input Password -->
+    <EditText
+        android:id="@+id/lgnpassword"
+        android:drawableEnd="@drawable/eye"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Kata sandi"
+        android:background="@drawable/input_rounded"
+        android:padding="12dp"
+        android:textSize="14sp"
+        android:layout_below="@id/lgnusername"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:inputType="textPassword"
+        android:drawablePadding="12dp"/>
+
+    <!-- Tombol Masuk -->
+    <Button
+        android:id="@+id/lgnmasuk"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Masuk"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_below="@id/lgnpassword"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="#37B943"/>
+
+    <!-- Teks Daftar -->
+    <TextView
+        android:id="@+id/lgndaftar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Belum punya akun? "
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:layout_below="@id/lgnmasuk"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/lgndaftar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Daftar"
+        android:textSize="14sp"
+        android:textColor="#0000FF"
+        android:textStyle="bold"
+        android:layout_toEndOf="@id/lgndaftar"
+        android:layout_alignBaseline="@id/lgndaftar"
+        android:elevation="1dp"/>
+
+    <ImageView
+        android:id="@+id/lgnshape2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shapes2"
+        android:scaleType="fitXY"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:elevation="-2dp"/>
+
+</RelativeLayout>

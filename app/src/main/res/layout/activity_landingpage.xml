@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EEEEEE"
+    tools:context=".LandingpageActivity">
+
+
+    <!-- Background Shape -->
+    <ImageView
+        android:id="@+id/lpshapes"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/shapes"
+        android:scaleType="fitXY"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="0dp"/>
+
+    <ImageView
+        android:id="@+id/lpwelcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/welcome"
+        android:layout_below="@id/lpshapes"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
+
+    <ImageView
+        android:id="@+id/lplogo"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/logo2"
+        android:background="@drawable/green_square"
+        android:padding="16dp"
+        android:layout_below="@id/lpwelcome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        />
+
+    <TextView
+        android:id="@+id/lpsubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ayooo Kelola Tanaman Secara Efisien"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:layout_below="@id/lplogo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
+
+    <Button
+        android:id="@+id/lpmulai"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:text="Mulai"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:backgroundTint="#2E7D32"
+        android:textColor="@android:color/white"
+        android:layout_below="@id/lpsubtitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        />
+
+    <TextView
+        android:id="@+id/lpmasuk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Klik Mulai Untuk Masuk"
+        android:textSize="12sp"
+        android:textColor="#000000"
+        android:layout_below="@id/lpmulai"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="1dp"
+        />
+
+    <ImageView
+        android:id="@+id/lpshape2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shapes2"
+        android:scaleType="fitXY"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:elevation="-2dp"/>
+
+</RelativeLayout>
