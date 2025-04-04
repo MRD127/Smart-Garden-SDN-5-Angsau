@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -31,6 +32,37 @@ class MainActivity : AppCompatActivity() {
         
         val buttonSensor = findViewById<Button>(R.id.Button_sensor)
         val buttonAktuator = findViewById<Button>(R.id.Buton_akuator)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
+// Tandai menu "detail" sebagai aktif
+        bottomNav.selectedItemId = R.id.home
+        bottomNav.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.home -> {
+                     // Sekarang benar-benar mengganti fragment
+                    true
+                }
+                R.id.detail -> {
+                    startActivity(Intent(this, DetailActivity::class.java))
+                    overridePendingTransition(0, 0) // Jika ada fragment detail, bisa dipanggil di sini
+                    true
+                }
+                R.id.history -> {
+                    startActivity(Intent(this, HistoryActivity::class.java))
+                    finish()
+                    overridePendingTransition(0, 0)
+                    true
+                }
+                R.id.setting -> {
+                    startActivity(Intent(this, SettingActivity::class.java))
+                    finish()
+                    overridePendingTransition(0, 0)
+                    true
+                }
+                else -> false
+            }
+        }
+
 
         // Default: Tampilkan SensorFragment saat pertama kali dibuka
         loadFragment(SensorFragment())
@@ -43,6 +75,7 @@ class MainActivity : AppCompatActivity() {
             loadFragment(AktuatorFragment())
         }
     }
+
 
     private fun fetchWeatherData(city: String) {
         val textCity = findViewById<TextView>(R.id.textCity)
