@@ -2,4 +2,10 @@
     <string name="app_name">Smart Garden</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="zidan_gmail_com">zidan@gmail.com</string>
+    <string name="item_title">Item Title</string>
+    <string name="item_description">Item description</string>
+    <string name="muhammad_zidan">Muhammad Zidan</string>
+    <string name="setting">Setting</string>
+    <string name="more">More</string>
 </resources>
