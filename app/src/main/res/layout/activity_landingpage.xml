@@ -60,7 +60,7 @@
         android:text="Mulai"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:backgroundTint="#2E7D32"
+        android:backgroundTint="#37B943"
         android:textColor="@android:color/white"
         android:layout_below="@id/lpsubtitle"
         android:layout_centerHorizontal="true"
