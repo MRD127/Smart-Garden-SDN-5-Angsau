@@ -27,6 +27,13 @@ class LoginActivity : AppCompatActivity() {
         val passwordField = findViewById<EditText>(R.id.lgnpassword)
         val loginButton = findViewById<Button>(R.id.lgnmasuk)
         val registerText = findViewById<TextView>(R.id.lgndaftar2)
+        val forgotPasswordText = findViewById<TextView>(R.id.lgnlupapassword)
+
+        // Navigasi ke halaman lupa password
+        forgotPasswordText.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+        }
 
         // Navigasi ke halaman RegisterActivity saat teks "Daftar" diklik
         registerText.setOnClickListener {
