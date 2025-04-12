@@ -59,6 +59,7 @@ class MainActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
+
                 else -> false
             }
         }
