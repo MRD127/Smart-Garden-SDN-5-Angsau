@@ -72,6 +72,8 @@
             android:padding="16dp">
 
             <!-- App Settings -->
+
+            <!-- Item Template -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +83,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <!-- Item Template -->
             <include layout="@layout/setting_item" android:id="@+id/personalInfo" />
             <include layout="@layout/setting_item" android:id="@+id/notifications" />
             <include layout="@layout/setting_item" android:id="@+id/privacy" />

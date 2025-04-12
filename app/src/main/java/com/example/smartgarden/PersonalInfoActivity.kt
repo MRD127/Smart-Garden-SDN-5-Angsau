@@ -1,8 +1,8 @@
 package com.example.smartgarden
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class PersonalInfoActivity : AppCompatActivity() {
@@ -12,8 +12,9 @@ class PersonalInfoActivity : AppCompatActivity() {
 
         val btnEdit = findViewById<Button>(R.id.btnEditProfile)
         btnEdit.setOnClickListener {
-            Toast.makeText(this, "Edit Profile clicked", Toast.LENGTH_SHORT).show()
-            // Bisa ditambahkan navigasi ke EditProfileActivity nanti
+            // Navigasi ke EditProfileActivity
+            val intent = Intent(this, EditProfileActivity::class.java)
+            startActivity(intent)
         }
     }
 }

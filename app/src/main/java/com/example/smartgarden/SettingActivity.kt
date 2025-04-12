@@ -42,22 +42,23 @@ class SettingActivity : AppCompatActivity() {
             }
         }
 
-        // Logout
+        // ✅ Logout
         val logoutButton = findViewById<Button>(R.id.btnLogout)
         logoutButton.setOnClickListener {
             Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show()
-            // Bisa arahkan ke LoginActivity
-            // startActivity(Intent(this, LoginActivity::class.java))
-            // finish()
+            val intent = Intent(this, LandingpageActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
         }
 
-        // Navigasi ke tiap setting item
+        // ✅ Navigasi ke tiap setting item
         findViewById<LinearLayout>(R.id.personalInfo).setOnClickListener {
             startActivity(Intent(this, PersonalInfoActivity::class.java))
         }
 
         findViewById<LinearLayout>(R.id.notifications).setOnClickListener {
-            Toast.makeText(this, "Notifications clicked", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, NotificationsActivity::class.java))
         }
 
         findViewById<LinearLayout>(R.id.privacy).setOnClickListener {
@@ -76,8 +77,8 @@ class SettingActivity : AppCompatActivity() {
             Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show()
         }
 
-        // Set judul dan deskripsi tiap item
-        setupSettingItem(R.id.personalInfo, R.drawable.ic_profile, "Personal Information", "Your account information")
+        // ✅ Set judul dan deskripsi tiap item
+        setupSettingItem(R.id.personalInfo, R.drawable.ic_profile, "Personal Information", "Your profil information")
         setupSettingItem(R.id.notifications, R.drawable.ic_notifications, "Notifications", "Notification settings")
         setupSettingItem(R.id.privacy, R.drawable.ic_privacy, "Privacy", "Contact")
         setupSettingItem(R.id.passwordAccount, R.drawable.ic_password, "Password & Account", "Manage your Account settings")

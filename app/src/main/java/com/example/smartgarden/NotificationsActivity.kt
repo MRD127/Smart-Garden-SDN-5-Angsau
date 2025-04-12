@@ -1,20 +1,27 @@
 package com.example.smartgarden
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.Switch
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class NotificationsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_notifications)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        // Mengambil reference untuk switch
+        val notificationSwitch: Switch = findViewById(R.id.notificationSwitch)
+
+        // Mengatur listener untuk switch
+        notificationSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // Mengaktifkan notifikasi
+                Toast.makeText(this, "Notifications Enabled", Toast.LENGTH_SHORT).show()
+            } else {
+                // Menonaktifkan notifikasi
+                Toast.makeText(this, "Notifications Disabled", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

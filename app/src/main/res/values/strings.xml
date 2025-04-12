@@ -8,4 +8,7 @@
     <string name="muhammad_zidan">Muhammad Zidan</string>
     <string name="setting">Setting</string>
     <string name="more">More</string>
+    <string name="enable_or_disable_notifications_for_the_app">Enable or disable notifications for the app.</string>
+    <string name="enable_notifications">Enable Notifications</string>
+    <string name="notifications_settings">Notifications Settings</string>
 </resources>
