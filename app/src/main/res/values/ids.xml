@@ -2,4 +2,5 @@
 <resources>
     <item name="main" type="id" />
     <item name="fragment_container" type="id" />
+    <item name="btnLicense" type="id" />
 </resources>

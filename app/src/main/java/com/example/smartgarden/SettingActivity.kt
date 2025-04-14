@@ -61,29 +61,19 @@ class SettingActivity : AppCompatActivity() {
             startActivity(Intent(this, NotificationsActivity::class.java))
         }
 
-        findViewById<LinearLayout>(R.id.privacy).setOnClickListener {
-            Toast.makeText(this, "Privacy clicked", Toast.LENGTH_SHORT).show()
-        }
-
-        findViewById<LinearLayout>(R.id.passwordAccount).setOnClickListener {
-            Toast.makeText(this, "Password & Account clicked", Toast.LENGTH_SHORT).show()
-        }
-
         findViewById<LinearLayout>(R.id.help).setOnClickListener {
-            Toast.makeText(this, "Help clicked", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, NotificationsActivity::class.java))
         }
 
         findViewById<LinearLayout>(R.id.about).setOnClickListener {
-            Toast.makeText(this, "About clicked", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, AboutActivity::class.java))
         }
 
         // ✅ Set judul dan deskripsi tiap item
         setupSettingItem(R.id.personalInfo, R.drawable.ic_profile, "Personal Information", "Your profil information")
         setupSettingItem(R.id.notifications, R.drawable.ic_notifications, "Notifications", "Notification settings")
-        setupSettingItem(R.id.privacy, R.drawable.ic_privacy, "Privacy", "Contact")
-        setupSettingItem(R.id.passwordAccount, R.drawable.ic_password, "Password & Account", "Manage your Account settings")
         setupSettingItem(R.id.help, R.drawable.ic_help, "Help", "Data preferences and storage settings")
-        setupSettingItem(R.id.about, R.drawable.ic_info, "About", "Version 1.2.")
+        setupSettingItem(R.id.about, R.drawable.ic_info, "About", "Version 1.0")
     }
 
     private fun setupSettingItem(itemId: Int, iconRes: Int, title: String, desc: String) {

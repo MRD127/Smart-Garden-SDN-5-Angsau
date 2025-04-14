@@ -35,11 +35,25 @@
             android:id="@+id/notificationsDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
             android:text="Control notifications aplikasi"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"/>
+            android:textSize="16sp" />
     </LinearLayout>
+
+    <!-- Tombol Kembali -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:background="@color/white"
+        android:contentDescription="@string/kembali"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <!-- Card with switch -->
     <androidx.cardview.widget.CardView
