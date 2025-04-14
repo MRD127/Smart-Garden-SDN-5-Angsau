@@ -1,17 +1,21 @@
 package com.example.smartgarden
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import com.github.anastr.speedviewlib.SpeedView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 class DetailActivity : AppCompatActivity() {
     private val API_KEY = "47730936a35a0e34ea8ecbf7e9945d19" // Ganti dengan API Key Anda
@@ -35,22 +39,26 @@ class DetailActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0) // Agar tidak menumpuk activity
                     true
                 }
+
                 R.id.detail -> {
                     // Sudah di halaman detail, tidak perlu apa-apa
                     true
                 }
+
                 R.id.history -> {
                     startActivity(Intent(this, HistoryActivity::class.java))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
+
                 R.id.setting -> {
                     startActivity(Intent(this, SettingActivity::class.java))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
+
                 else -> false
             }
         }
@@ -65,6 +73,15 @@ class DetailActivity : AppCompatActivity() {
         val textTemp = findViewById<TextView>(R.id.textTemp)
         val textDesc = findViewById<TextView>(R.id.textDesc)
         val imageWeather = findViewById<ImageView>(R.id.imageWeather)
+        val speedView = findViewById<SpeedView>(R.id.speedView)
+
+        val poppinsFont: Typeface? = ResourcesCompat.getFont(this, R.font.poppins_bold)
+
+
+
+        // Tes nilai (misal suhu)
+        speedView.speedTo(40f)
+
 
         // Memanggil API cuaca menggunakan Retrofit
         ApiClient.instance.getWeather(city, API_KEY).enqueue(object : Callback<WeatherResponse> {

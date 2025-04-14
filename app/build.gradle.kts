@@ -57,6 +57,6 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation("com.google.firebase:firebase-firestore")
-
+    implementation ("com.github.anastr:speedviewlib:1.6.1")
 
 }

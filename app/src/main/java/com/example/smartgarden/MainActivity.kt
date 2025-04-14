@@ -17,6 +17,9 @@ import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import androidx.core.content.ContextCompat
+import android.content.res.ColorStateList
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,6 +36,7 @@ class MainActivity : AppCompatActivity() {
         val buttonSensor = findViewById<Button>(R.id.Button_sensor)
         val buttonAktuator = findViewById<Button>(R.id.Buton_akuator)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
+
 
 // Tandai menu "detail" sebagai aktif
         bottomNav.selectedItemId = R.id.home
