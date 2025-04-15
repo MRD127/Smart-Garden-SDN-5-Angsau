@@ -216,28 +216,28 @@
 
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="337dp"
-        android:layout_height="410dp"
+        android:layout_width="359dp"
+        android:layout_height="177dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551"
+        app:layout_constraintVertical_bias="0.837"
         app:srcCompat="@drawable/bg_card" />
 
     <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/speedView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="341dp"
+        android:layout_height="352dp"
         android:layout_margin="24dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@+id/imageView8"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.594"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.451"
         app:sv_backgroundCircleColor="@color/white"
         app:sv_indicator="NormalIndicator"
         app:sv_maxSpeed="100"
@@ -250,6 +250,57 @@
         app:sv_unitTextSize="20sp"
         app:sv_withTremble="true"
         tools:ignore="MissingConstraints" />
+
+    <!-- ProgressBar Vertikal -->
+
+    <!-- Persentase -->
+
+    <ProgressBar
+        android:id="@+id/barCahaya"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="124dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:max="100"
+        android:progress="40"
+        android:progressTint="@android:color/holo_orange_light"
+        android:rotation="270"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.349" />
+
+    <TextView
+        android:id="@+id/percentageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.257"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barCahaya"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Intensitas Cahaya"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/barCahaya"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.216" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
