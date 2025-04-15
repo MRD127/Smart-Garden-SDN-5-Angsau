@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.widget.ImageButton
 
@@ -22,10 +23,11 @@ class PersonalInfoActivity : AppCompatActivity() {
     private lateinit var profileImage: ImageView
 
     private lateinit var etName: EditText
-    private lateinit var etPhone: EditText
+    private lateinit var etEmail: EditText
     private lateinit var btnSave: Button
     private var isEditing = false
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_info)
@@ -36,7 +38,7 @@ class PersonalInfoActivity : AppCompatActivity() {
         val btnEdit = findViewById<ImageButton>(R.id.btnEdit)
         btnSave = findViewById(R.id.btnSave)
         etName = findViewById(R.id.etName)
-        etPhone = findViewById(R.id.etPhone)
+        etEmail = findViewById(R.id.etEmail)
 
         btnChangeProfilePic.setOnClickListener {
             showImagePickerDialog()
@@ -71,10 +73,10 @@ class PersonalInfoActivity : AppCompatActivity() {
         etName.isEnabled = enabled
         etName.isCursorVisible = enabled
 
-        etPhone.isFocusable = enabled
-        etPhone.isFocusableInTouchMode = enabled
-        etPhone.isEnabled = enabled
-        etPhone.isCursorVisible = enabled
+        etEmail.isFocusable = enabled
+        etEmail.isFocusableInTouchMode = enabled
+        etEmail.isEnabled = enabled
+        etEmail.isCursorVisible = enabled
     }
 
     private fun showImagePickerDialog() {
