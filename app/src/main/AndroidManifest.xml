@@ -21,14 +21,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartGarden"
         tools:targetApi="31">
+        <activity android:name=".HelpActivity"
+            android:label="Bantuan"
+            android:parentActivityName=".MainActivity" />
         <!-- ✅ Tambahkan activity PersonalInfoActivity -->
         <activity
             android:name=".PersonalInfoActivity"
             android:exported="true" />
-        <activity
-            android:name=".NotificationsActivity" />
-        <activity
-            android:name=".AboutActivity" />
+        <activity android:name=".NotificationsActivity" />
+        <activity android:name=".AboutActivity" />
         <activity
             android:name=".SettingActivity"
             android:exported="false" />

@@ -62,7 +62,7 @@ class SettingActivity : AppCompatActivity() {
         }
 
         findViewById<LinearLayout>(R.id.help).setOnClickListener {
-            startActivity(Intent(this, NotificationsActivity::class.java))
+            startActivity(Intent(this, HelpActivity::class.java))
         }
 
         findViewById<LinearLayout>(R.id.about).setOnClickListener {
