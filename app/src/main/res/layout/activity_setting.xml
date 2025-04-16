@@ -30,24 +30,26 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <!-- Foto Profil -->
         <ImageView
             android:id="@+id/profileImage"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/profile_dashboard"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/circle_green_background"
             android:scaleType="centerCrop"
-            android:layout_gravity="start"
-            android:backgroundTint="@android:color/darker_gray" />
+            android:background="@drawable/circle_green_background"
+            android:clipToOutline="true"
+            android:padding="4dp" />
+
 
         <TextView
             android:id="@+id/profileName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/muhammad_zidan"
+            android:text=""
             android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
     <!-- Scrollable Area -->

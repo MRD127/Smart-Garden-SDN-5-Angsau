@@ -46,20 +46,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
-
-        <!-- Tombol Edit (Pensil) -->
-        <ImageButton
-            android:id="@+id/btnEdit"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="4dp"
-            android:background="@drawable/bg_circle_white"
-            android:src="@drawable/ic_edit"
-            android:scaleType="centerInside"
-            android:contentDescription="Edit Profil"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Konten Scrollable -->
@@ -80,32 +66,23 @@
             android:gravity="center_horizontal">
 
             <!-- Foto Profil -->
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/circle_green_background"
+                android:scaleType="centerCrop"
+                android:background="@drawable/circle_green_background"
+                android:clipToOutline="true"
+                android:padding="4dp" />
+
+            <!-- Tombol Pilih Foto Profil -->
+            <Button
+                android:id="@+id/btnChangeProfilePicture"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/profileImage"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:src="@drawable/circle_green_background"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle_green_background"
-                    android:clipToOutline="true"
-                    android:padding="4dp" />
-
-                <ImageButton
-                    android:id="@+id/btnChangeProfilePic"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_alignEnd="@id/profileImage"
-                    android:layout_alignBottom="@id/profileImage"
-                    android:layout_marginEnd="-4dp"
-                    android:layout_marginBottom="0dp"
-                    android:background="@drawable/circle_green_background"
-                    android:contentDescription="Ubah Foto Profil"
-                    android:src="@drawable/cam" />
-            </RelativeLayout>
+                android:layout_height="wrap_content"
+                android:text="Pilih Foto"
+                android:layout_marginTop="16dp" />
 
             <!-- Informasi Profil -->
             <androidx.cardview.widget.CardView
@@ -141,10 +118,11 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@null"
+                            android:focusable="true"
                             android:clickable="true"
-                            android:focusable="false"
+                            android:cursorVisible="true"
                             android:hint="Nama Lengkap"
-                            android:text="Muhammad Zidan"
+                            android:text=""
                             android:textColor="#212121"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -171,28 +149,16 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:background="@null"
+                            android:focusable="true"
                             android:clickable="true"
-                            android:focusable="false"
+                            android:cursorVisible="true"
                             android:hint="Email"
-                            android:text="zidan@example.com"
+                            android:text=""
                             android:textColor="#212121"
                             android:textSize="16sp" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
-            <!-- Tombol Simpan -->
-            <Button
-                android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Simpan"
-                android:visibility="gone"
-                android:layout_marginTop="32dp"
-                android:backgroundTint="@color/green"
-                android:textColor="@android:color/white"
-                android:paddingStart="32dp"
-                android:paddingEnd="32dp" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
