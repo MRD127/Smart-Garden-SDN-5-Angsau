@@ -2,48 +2,53 @@ package com.example.smartgarden
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
+import androidx.core.content.ContextCompat
+import android.content.res.ColorStateList
+
 
 class MainActivity : AppCompatActivity() {
 
     private val API_KEY = "47730936a35a0e34ea8ecbf7e9945d19" // Ganti dengan API Key OpenWeatherMap Anda
-
+    
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loadProfileImage() // Panggil fungsi untuk menampilkan foto profil
-
-        val cityName = "Pelaihari"
+        val cityName = "Pelaihari" // Ganti dengan kota yang ingin dicari
         fetchWeatherData(cityName)
-
+        
         val buttonSensor = findViewById<Button>(R.id.Button_sensor)
         val buttonAktuator = findViewById<Button>(R.id.Buton_akuator)
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
+
+// Tandai menu "detail" sebagai aktif
         bottomNav.selectedItemId = R.id.home
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.home -> {
+                     // Sekarang benar-benar mengganti fragment
                     true
                 }
                 R.id.detail -> {
                     startActivity(Intent(this, DetailActivity::class.java))
-                    overridePendingTransition(0, 0)
+                    overridePendingTransition(0, 0) // Jika ada fragment detail, bisa dipanggil di sini
                     true
                 }
                 R.id.history -> {
@@ -58,11 +63,13 @@ class MainActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
+
                 else -> false
             }
         }
 
-        // Default tampilkan SensorFragment
+
+        // Default: Tampilkan SensorFragment saat pertama kali dibuka
         loadFragment(SensorFragment())
 
         buttonSensor.setOnClickListener {
@@ -73,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             loadFragment(AktuatorFragment())
         }
     }
+
 
     private fun fetchWeatherData(city: String) {
         val textCity = findViewById<TextView>(R.id.textCity)
@@ -101,18 +109,10 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
     private fun loadFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .commit()
     }
-
-    private fun loadProfileImage() {
-        val profileImageView = findViewById<ImageView>(R.id.profileImageMain)
-        val file = File(filesDir, "profile_picture.png")
-        if (file.exists()) {
-            val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-            profileImageView.setImageBitmap(bitmap)
-        }
     }
-}

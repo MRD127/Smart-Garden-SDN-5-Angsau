@@ -237,11 +237,11 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/kelembaban"
+                            android:id="@+id/textSoilMoisture"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:text="30°"
+                            android:text="-"
                             android:textColor="#E2E3EE"
                             android:textSize="32sp" />
                     </LinearLayout>

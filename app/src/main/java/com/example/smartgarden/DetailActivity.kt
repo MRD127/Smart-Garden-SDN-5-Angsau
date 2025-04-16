@@ -3,8 +3,6 @@ package com.example.smartgarden
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -18,15 +16,13 @@ import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.random.Random
 
 class DetailActivity : AppCompatActivity() {
+
     private val API_KEY = "47730936a35a0e34ea8ecbf7e9945d19"
     private lateinit var barCahaya: ProgressBar
     private lateinit var percentageText: TextView
     private lateinit var speedView: SpeedView
-    private val handler = Handler(Looper.getMainLooper())
-    private lateinit var updateRunnable: Runnable
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +36,11 @@ class DetailActivity : AppCompatActivity() {
 
         setupBottomNav()
         fetchWeatherData("Pelaihari")
-        startAutoUpdate()
+
+        // Update SpeedView dari SensorData secara real-time
+        SensorData.observe { moisture ->
+            speedView.speedTo(moisture.toFloat())
+        }
     }
 
     private fun setupBottomNav() {
@@ -55,7 +55,6 @@ class DetailActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
-
                 R.id.detail -> true
                 R.id.history -> {
                     startActivity(Intent(this, HistoryActivity::class.java))
@@ -63,32 +62,15 @@ class DetailActivity : AppCompatActivity() {
                     overridePendingTransition(0, 0)
                     true
                 }
-
                 R.id.setting -> {
                     startActivity(Intent(this, SettingActivity::class.java))
                     finish()
                     overridePendingTransition(0, 0)
                     true
                 }
-
                 else -> false
             }
         }
-    }
-
-    private fun startAutoUpdate() {
-        updateRunnable = object : Runnable {
-            override fun run() {
-                val randomPercentage = Random.nextInt(0, 101)
-                val randomSpeed = Random.nextInt(0, 101)
-
-                updateProgress(randomPercentage)
-                speedView.speedTo(randomSpeed.toFloat())
-
-                handler.postDelayed(this, 1000)
-            }
-        }
-        handler.post(updateRunnable)
     }
 
     private fun updateProgress(value: Int) {
@@ -98,7 +80,7 @@ class DetailActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        handler.removeCallbacks(updateRunnable)
+        SensorData.removeObservers()
     }
 
     private fun fetchWeatherData(city: String) {
@@ -115,7 +97,7 @@ class DetailActivity : AppCompatActivity() {
                     val weather = response.body()
                     textCity.text = weather?.name
                     textTemp.text = "${weather?.main?.temp}°C"
-                    textDesc.text = weather?.weather?.get(0)?.description?.capitalize()
+                    textDesc.text = weather?.weather?.get(0)?.description?.replaceFirstChar { it.uppercaseChar() }
 
                     val iconUrl = "https://openweathermap.org/img/wn/${weather?.weather?.get(0)?.icon}@2x.png"
                     Picasso.get().load(iconUrl).into(imageWeather)

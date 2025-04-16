@@ -245,7 +245,7 @@
         app:sv_sectionStyle="ROUND"
         app:sv_speedTextColor="@color/green"
         app:sv_speedTextSize="36sp"
-        app:sv_unit="°C"
+        app:sv_unit="%"
         app:sv_unitTextColor="@color/green"
         app:sv_unitTextSize="20sp"
         app:sv_withTremble="true"

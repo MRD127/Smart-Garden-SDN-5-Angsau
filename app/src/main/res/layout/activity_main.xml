@@ -161,7 +161,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/Smart"
         android:layout_width="124dp"
         android:layout_height="39dp"
         android:fontFamily="@font/poppins_bold"
