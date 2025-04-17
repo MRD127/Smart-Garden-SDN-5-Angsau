@@ -12,6 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.github.anastr.speedviewlib.SpeedView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -23,6 +28,11 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var barCahaya: ProgressBar
     private lateinit var percentageText: TextView
     private lateinit var speedView: SpeedView
+    private lateinit var database: DatabaseReference
+    private lateinit var humidityText: TextView
+    private lateinit var temperatureText: TextView
+    private lateinit var barHumidity: ProgressBar
+    private lateinit var barTemperatur: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +43,10 @@ class DetailActivity : AppCompatActivity() {
         barCahaya = findViewById(R.id.barCahaya)
         percentageText = findViewById(R.id.percentageText)
         speedView = findViewById(R.id.speedView)
+        barHumidity = findViewById(R.id.barHumidity)
+        humidityText = findViewById(R.id.percentageHumidity)
+        barTemperatur = findViewById(R.id.barTemperature)
+        temperatureText = findViewById(R.id.percentageTemperature)
 
         setupBottomNav()
         fetchWeatherData("Pelaihari")
@@ -40,8 +54,65 @@ class DetailActivity : AppCompatActivity() {
         // Update SpeedView dari SensorData secara real-time
         SensorData.observe { moisture ->
             speedView.speedTo(moisture.toFloat())
+
+
         }
+
+        // Update SpeedView dari SensorData secara real-time
+        SensorHumidity.observe { humidity ->
+            barHumidity
+
+
+        }
+
+        // Firebase untuk humidity
+        val humidityRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("sensor/humidity")
+
+        humidityRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val humidity = snapshot.getValue(Int::class.java)
+                if (humidity != null) {
+                    humidityText.text = "$humidity%"
+                    barHumidity.progress = humidity
+                    SensorHumidity.setHumidity(humidity.toFloat())
+                } else {
+                    humidityText.text = "Data tidak tersedia"
+                    barHumidity.progress = 0
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                humidityText.text = "Gagal memuat data humidity"
+                barHumidity.progress = 0
+            }
+        })
+
+        // Firebase untuk humidity
+        val temperatureRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("sensor/temperature")
+
+        temperatureRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val temperature = snapshot.getValue(Int::class.java)
+                if (temperature != null) {
+                    temperatureText.text = "$temperature%"
+                    barTemperatur.progress = temperature
+                } else {
+                    temperatureText.text = "Data tidak tersedia"
+                    barTemperatur.progress = 0
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                temperatureText.text = "Gagal memuat data humidity"
+                barTemperatur.progress = 0
+            }
+        })
+
+
     }
+
 
     private fun setupBottomNav() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
