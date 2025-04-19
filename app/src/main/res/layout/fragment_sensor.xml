@@ -11,8 +11,8 @@
 
         <LinearLayout
             android:id="@+id/linearLayout"
-            android:layout_width="167dp"
-            android:layout_height="153dp"
+            android:layout_width="168dp"
+            android:layout_height="162dp"
             android:layout_margin="16dp"
             android:background="@drawable/bg_card"
             android:elevation="4dp"
@@ -28,28 +28,41 @@
             tools:ignore="MissingConstraints">
 
             <LinearLayout
-                android:layout_width="134dp"
-                android:layout_height="81dp"
+                android:layout_width="144dp"
+                android:layout_height="89dp"
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="151dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="50dp"
+                        android:layout_width="66dp"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/intensitas"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="57dp"
-                            android:layout_weight="1"
-                            android:text="30°"
-                            android:textColor="#E2E3EE"
-                            android:textSize="32sp" />
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="21dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal"></LinearLayout>
+
+                            <TextView
+                                android:id="@+id/intensitas"
+                                android:layout_width="match_parent"
+                                android:layout_height="76dp"
+                                android:layout_weight="1"
+                                android:text="30°"
+                                android:textAlignment="center"
+                                android:textColor="#E2E3EE"
+                                android:textSize="34sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -59,10 +72,16 @@
 
                         <ImageView
                             android:id="@+id/imageView3"
-                            android:layout_width="match_parent"
-                            android:layout_height="99dp"
+                            android:layout_width="56dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:src="@drawable/intensitas_icon" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"></LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -205,8 +224,8 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="167dp"
-            android:layout_height="153dp"
+            android:layout_width="171dp"
+            android:layout_height="162dp"
             android:layout_margin="16dp"
             android:background="@drawable/bg_card"
             android:elevation="4dp"
@@ -222,28 +241,41 @@
             tools:ignore="MissingConstraints">
 
             <LinearLayout
-                android:layout_width="134dp"
-                android:layout_height="81dp"
+                android:layout_width="144dp"
+                android:layout_height="87dp"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="84dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_width="64dp"
+                        android:layout_width="74dp"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/textSoilMoisture"
-                            android:layout_width="match_parent"
+                        <LinearLayout
+                            android:layout_width="79dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="-"
-                            android:textColor="#E2E3EE"
-                            android:textSize="32sp" />
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="21dp"
+                                android:layout_weight="1"
+                                android:orientation="vertical"></LinearLayout>
+
+                            <TextView
+                                android:id="@+id/textSoilMoisture"
+                                android:layout_width="match_parent"
+                                android:layout_height="76dp"
+                                android:layout_weight="1"
+                                android:text="-"
+                                android:textAlignment="center"
+                                android:textColor="#E2E3EE"
+                                android:textSize="40sp" />
+                        </LinearLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -253,10 +285,17 @@
 
                         <ImageView
                             android:id="@+id/imageView2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_width="74dp"
+                            android:layout_height="108dp"
                             android:layout_weight="1"
                             android:src="@drawable/kelembaban_icon" />
+
+                        <LinearLayout
+                            android:layout_width="11dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal"></LinearLayout>
+
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

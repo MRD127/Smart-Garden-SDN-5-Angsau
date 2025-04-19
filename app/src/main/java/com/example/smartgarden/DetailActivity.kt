@@ -1,6 +1,7 @@
 package com.example.smartgarden
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.widget.ImageView
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.room.parser.Section
 import com.github.anastr.speedviewlib.SpeedView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.DataSnapshot
@@ -33,6 +35,12 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var temperatureText: TextView
     private lateinit var barHumidity: ProgressBar
     private lateinit var barTemperatur: ProgressBar
+    private lateinit var barSoilMoisture: ProgressBar
+    private lateinit var percentageSoilMoisture: TextView
+    private lateinit var textMoistureStatus: TextView
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,24 +55,24 @@ class DetailActivity : AppCompatActivity() {
         humidityText = findViewById(R.id.percentageHumidity)
         barTemperatur = findViewById(R.id.barTemperature)
         temperatureText = findViewById(R.id.percentageTemperature)
+        barSoilMoisture = findViewById(R.id.barSoilMoisture)
+        percentageSoilMoisture = findViewById(R.id.percentageSoilMoisture)
+
+
 
         setupBottomNav()
         fetchWeatherData("Pelaihari")
 
-        // Update SpeedView dari SensorData secara real-time
-        SensorData.observe { moisture ->
-            speedView.speedTo(moisture.toFloat())
 
 
-        }
 
         // Update SpeedView dari SensorData secara real-time
         SensorHumidity.observe { humidity ->
             barHumidity
 
 
-        }
 
+}
         // Firebase untuk humidity
         val humidityRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
             .getReference("sensor/humidity")
@@ -110,6 +118,27 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
+        // Firebase untuk humidity
+        val SoilMoisturateRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("sensor/soil_moisture")
+
+        SoilMoisturateRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val soilmoisture = snapshot.getValue(Int::class.java)
+                if (soilmoisture != null) {
+                    percentageSoilMoisture.text = "$soilmoisture%"
+                    barSoilMoisture.progress = soilmoisture
+                } else {
+                    percentageSoilMoisture.text = "Data tidak tersedia"
+                    barSoilMoisture.progress = 0
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                percentageSoilMoisture.text = "Gagal memuat data humidity"
+                barSoilMoisture.progress = 0
+            }
+        })
 
     }
 

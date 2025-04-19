@@ -217,6 +217,7 @@
 
     <!-- Persentase -->
 
+
     <ImageView
         android:id="@+id/imageView8"
         android:layout_width="361dp"
@@ -225,7 +226,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832"
+        app:layout_constraintVertical_bias="0.693"
         app:srcCompat="@drawable/bg_card" />
 
     <com.github.anastr.speedviewlib.SpeedView
@@ -237,20 +238,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.404"
-        app:sv_backgroundCircleColor="@color/white"
-        app:sv_indicator="NormalIndicator"
+        app:layout_constraintVertical_bias="0.351"
+        app:sv_backgroundCircleColor="#FCF5FD"
+        app:sv_indicator="KiteIndicator"
+        app:sv_indicatorColor="#659800"
         app:sv_maxSpeed="100"
         app:sv_minSpeed="0"
-        app:sv_sectionStyle="ROUND"
+        app:sv_sectionStyle="BUTT"
         app:sv_speedTextColor="@color/green"
+        app:sv_speedTextFormat="INTEGER"
+        app:sv_speedTextPosition="BOTTOM_CENTER"
         app:sv_speedTextSize="36sp"
+        app:sv_speedometerMode="TOP"
         app:sv_unit="%"
         app:sv_unitTextColor="@color/green"
         app:sv_unitTextSize="20sp"
-        app:sv_withTremble="true"
+        app:sv_unitUnderSpeedText="false"
+        app:sv_withTremble="false"
         tools:ignore="MissingConstraints" />
 
     <ProgressBar
@@ -291,16 +298,16 @@
         android:layout_width="66dp"
         android:layout_height="32dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Intensitas
-        Cahaya"
+        android:text="Intensitas Cahaya"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/barCahaya"
         app:layout_constraintEnd_toEndOf="@+id/imageView8"
-        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintHorizontal_bias="0.060"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <ProgressBar
         android:id="@+id/barHumidity"
@@ -315,7 +322,7 @@
         android:rotation="270"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintHorizontal_bias="0.365"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:layout_constraintVertical_bias="0.285" />
@@ -330,25 +337,25 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.381"
+        app:layout_constraintHorizontal_bias="0.399"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barCahaya"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.127" />
 
     <TextView
         android:id="@+id/textTempp"
-        android:layout_width="58dp"
-        android:layout_height="26dp"
+        android:layout_width="63dp"
+        android:layout_height="25dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Humidity"
         android:textColor="#FFFFFF"
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/barCahaya"
         app:layout_constraintEnd_toEndOf="@+id/imageView8"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.19" />
+        app:layout_constraintVertical_bias="0.571" />
 
     <ProgressBar
         android:id="@+id/barTemperature"
@@ -363,7 +370,7 @@
         android:rotation="270"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.582"
+        app:layout_constraintHorizontal_bias="0.631"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:layout_constraintVertical_bias="0.285" />
@@ -378,10 +385,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.565"
+        app:layout_constraintHorizontal_bias="0.598"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barCahaya"
-        app:layout_constraintVertical_bias="0.13" />
+        app:layout_constraintVertical_bias="0.127" />
 
     <TextView
         android:id="@+id/textTemperature"
@@ -393,10 +400,59 @@
         android:textSize="10sp"
         app:layout_constraintBottom_toTopOf="@+id/barCahaya"
         app:layout_constraintEnd_toEndOf="@+id/imageView8"
-        app:layout_constraintHorizontal_bias="0.586"
+        app:layout_constraintHorizontal_bias="0.668"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
         app:layout_constraintTop_toTopOf="@+id/imageView8"
-        app:layout_constraintVertical_bias="0.173"
+        app:layout_constraintVertical_bias="0.533"
+        tools:ignore="DuplicateIds" />
+
+    <ProgressBar
+        android:id="@+id/barSoilMoisture"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="96dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@android:color/darker_gray"
+        android:max="100"
+        android:progress="40"
+        android:progressTint="@color/cokelat"
+        android:rotation="270"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.277" />
+
+    <TextView
+        android:id="@+id/percentageSoilMoisture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/barCahaya"
+        app:layout_constraintVertical_bias="0.127" />
+
+    <TextView
+        android:id="@+id/textSo"
+        android:layout_width="71dp"
+        android:layout_height="22dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Soil Moisture"
+        android:textColor="#FFFFFF"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/barCahaya"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:layout_constraintHorizontal_bias="0.958"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toTopOf="@+id/imageView8"
+        app:layout_constraintVertical_bias="0.533"
         tools:ignore="DuplicateIds" />
 
 
