@@ -16,6 +16,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import android.graphics.Color
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -62,16 +64,23 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Default tampilkan SensorFragment
+        // Atur default fragment dan tombol aktif
         loadFragment(SensorFragment())
+        highlightButton(buttonSensor)
+        resetButton(buttonAktuator)
 
         buttonSensor.setOnClickListener {
             loadFragment(SensorFragment())
+            highlightButton(buttonSensor)
+            resetButton(buttonAktuator)
         }
 
         buttonAktuator.setOnClickListener {
             loadFragment(AktuatorFragment())
+            highlightButton(buttonAktuator)
+            resetButton(buttonSensor)
         }
+
     }
 
     private fun fetchWeatherData(city: String) {
@@ -99,6 +108,15 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+    private fun highlightButton(button: Button) {
+        button.setBackgroundColor(Color.WHITE)
+        button.setTextColor(Color.parseColor("#4CAF50")) // warna hijau misalnya
+    }
+
+    private fun resetButton(button: Button) {
+        button.setBackgroundColor(Color.parseColor("#4CAF50")) // warna hijau
+        button.setTextColor(Color.WHITE)
     }
 
     private fun loadFragment(fragment: Fragment) {
