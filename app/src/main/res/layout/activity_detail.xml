@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -226,39 +227,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.693"
+        app:layout_constraintVertical_bias="0.787"
         app:srcCompat="@drawable/bg_card" />
-
-    <com.github.anastr.speedviewlib.SpeedView
-        android:id="@+id/speedView"
-        android:layout_width="341dp"
-        android:layout_height="352dp"
-        android:layout_margin="24dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.471"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351"
-        app:sv_backgroundCircleColor="#FCF5FD"
-        app:sv_indicator="KiteIndicator"
-        app:sv_indicatorColor="#659800"
-        app:sv_maxSpeed="100"
-        app:sv_minSpeed="0"
-        app:sv_sectionStyle="BUTT"
-        app:sv_speedTextColor="@color/green"
-        app:sv_speedTextFormat="INTEGER"
-        app:sv_speedTextPosition="BOTTOM_CENTER"
-        app:sv_speedTextSize="36sp"
-        app:sv_speedometerMode="TOP"
-        app:sv_unit="%"
-        app:sv_unitTextColor="@color/green"
-        app:sv_unitTextSize="20sp"
-        app:sv_unitUnderSpeedText="false"
-        app:sv_withTremble="false"
-        tools:ignore="MissingConstraints" />
 
     <ProgressBar
         android:id="@+id/barCahaya"
@@ -279,7 +249,7 @@
         app:layout_constraintVertical_bias="0.277" />
 
     <TextView
-        android:id="@+id/percentageText"
+        android:id="@+id/cahayaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -288,10 +258,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.179"
+        app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barCahaya"
-        app:layout_constraintVertical_bias="0.135" />
+        app:layout_constraintVertical_bias="0.127" />
 
     <TextView
         android:id="@+id/textView2"
@@ -385,7 +355,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.598"
+        app:layout_constraintHorizontal_bias="0.61"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barCahaya"
         app:layout_constraintVertical_bias="0.127" />
@@ -434,7 +404,7 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.817"
+        app:layout_constraintHorizontal_bias="0.834"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barCahaya"
         app:layout_constraintVertical_bias="0.127" />
@@ -454,6 +424,5 @@
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:layout_constraintVertical_bias="0.533"
         tools:ignore="DuplicateIds" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

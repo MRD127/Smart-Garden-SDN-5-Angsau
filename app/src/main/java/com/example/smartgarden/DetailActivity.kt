@@ -1,5 +1,6 @@
 package com.example.smartgarden
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
@@ -28,8 +29,7 @@ class DetailActivity : AppCompatActivity() {
 
     private val API_KEY = "47730936a35a0e34ea8ecbf7e9945d19"
     private lateinit var barCahaya: ProgressBar
-    private lateinit var percentageText: TextView
-    private lateinit var speedView: SpeedView
+    private lateinit var cahayaText: TextView
     private lateinit var database: DatabaseReference
     private lateinit var humidityText: TextView
     private lateinit var temperatureText: TextView
@@ -42,6 +42,7 @@ class DetailActivity : AppCompatActivity() {
 
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -49,8 +50,7 @@ class DetailActivity : AppCompatActivity() {
 
         // Inisialisasi view
         barCahaya = findViewById(R.id.barCahaya)
-        percentageText = findViewById(R.id.percentageText)
-        speedView = findViewById(R.id.speedView)
+        cahayaText = findViewById(R.id.cahayaText)
         barHumidity = findViewById(R.id.barHumidity)
         humidityText = findViewById(R.id.percentageHumidity)
         barTemperatur = findViewById(R.id.barTemperature)
@@ -62,9 +62,6 @@ class DetailActivity : AppCompatActivity() {
 
         setupBottomNav()
         fetchWeatherData("Pelaihari")
-
-
-
 
         // Update SpeedView dari SensorData secara real-time
         SensorHumidity.observe { humidity ->
@@ -96,6 +93,27 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
+        // Firebase untuk humidity
+        val cahayaRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
+            .getReference("sensor/cahaya")
+
+        cahayaRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val cahaya = snapshot.getValue(Int::class.java)
+                if (cahaya != null) {
+                    cahayaText.text = "$cahaya%"
+                    barCahaya.progress = cahaya
+                } else {
+                    cahayaText.text = "Data tidak tersedia"
+                    barCahaya.progress = 0
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                cahayaText.text= "Gagal memuat data humidity"
+                barCahaya.progress = 0
+            }
+        })
         // Firebase untuk humidity
         val temperatureRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
             .getReference("sensor/temperature")
@@ -173,10 +191,6 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateProgress(value: Int) {
-        barCahaya.progress = value
-        percentageText.text = "$value%"
-    }
 
     override fun onDestroy() {
         super.onDestroy()

@@ -66,6 +66,8 @@ dependencies {
     implementation ("com.github.anastr:speedviewlib:1.6.1")
     implementation ("com.google.firebase:firebase-database:20.3.0")
     implementation ("com.google.firebase:firebase-database-ktx")
+    implementation ("com.mikhaellopez:circularprogressbar:3.1.0")
+
 
 
 
