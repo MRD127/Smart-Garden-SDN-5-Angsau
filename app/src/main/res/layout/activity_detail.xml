@@ -181,43 +181,43 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="100dp"
-        android:layout_height="47dp"
+        android:layout_width="137dp"
+        android:layout_height="46dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Tanah"
+        android:text="Tanaman"
         android:textColor="#37B943"
         android:textSize="25sp"
         android:textStyle="bold"
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.131"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25"
-        tools:ignore="MissingConstraints" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="150dp"
-        android:layout_height="39dp"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Kelembapan"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.138"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.227"
+        app:layout_constraintVertical_bias="0.255"
         tools:ignore="MissingConstraints" />
 
     <!-- ProgressBar Vertikal -->
 
     <!-- Persentase -->
 
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="150dp"
+        android:layout_height="39dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Detail"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:typeface="monospace"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.236"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -424,5 +424,39 @@
         app:layout_constraintTop_toTopOf="@+id/imageView8"
         app:layout_constraintVertical_bias="0.533"
         tools:ignore="DuplicateIds" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/circularSoilMoisture"
+        style="@style/Widget.Material3.CircularProgressIndicator"
+        android:layout_width="205dp"
+        android:layout_height="208dp"
+        android:layout_gravity="center"
+        app:indicatorInset="30dp"
+        app:indicatorSize="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.401"
+        app:trackColor="@color/gray"
+        app:trackThickness="26dp" />
+
+    <TextView
+        android:id="@+id/statusSoilMoisture"
+        android:layout_width="84dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Status"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/circularSoilMoisture"
+        app:layout_constraintEnd_toEndOf="@+id/circularSoilMoisture"
+        app:layout_constraintStart_toStartOf="@+id/circularSoilMoisture"
+        app:layout_constraintTop_toTopOf="@+id/circularSoilMoisture"
+        app:layout_constraintVertical_bias="0.513" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

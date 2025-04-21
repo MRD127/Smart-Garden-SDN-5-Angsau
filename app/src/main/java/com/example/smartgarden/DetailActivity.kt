@@ -15,6 +15,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.room.parser.Section
 import com.github.anastr.speedviewlib.SpeedView
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -38,6 +39,8 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var barSoilMoisture: ProgressBar
     private lateinit var percentageSoilMoisture: TextView
     private lateinit var textMoistureStatus: TextView
+    private lateinit var circularSoilMoisture: CircularProgressIndicator
+    private lateinit var statusSoilMoisture: TextView
 
 
 
@@ -57,6 +60,8 @@ class DetailActivity : AppCompatActivity() {
         temperatureText = findViewById(R.id.percentageTemperature)
         barSoilMoisture = findViewById(R.id.barSoilMoisture)
         percentageSoilMoisture = findViewById(R.id.percentageSoilMoisture)
+        circularSoilMoisture = findViewById(R.id.circularSoilMoisture)
+        statusSoilMoisture = findViewById(R.id.statusSoilMoisture)
 
 
 
@@ -68,11 +73,13 @@ class DetailActivity : AppCompatActivity() {
             barHumidity
 
 
+        }
 
-}
+
         // Firebase untuk humidity
-        val humidityRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
-            .getReference("sensor/humidity")
+        val humidityRef =
+            FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("sensor/humidity")
 
         humidityRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -94,8 +101,9 @@ class DetailActivity : AppCompatActivity() {
         })
 
         // Firebase untuk humidity
-        val cahayaRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
-            .getReference("sensor/cahaya")
+        val cahayaRef =
+            FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("sensor/cahaya")
 
         cahayaRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -110,13 +118,14 @@ class DetailActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                cahayaText.text= "Gagal memuat data humidity"
+                cahayaText.text = "Gagal memuat data humidity"
                 barCahaya.progress = 0
             }
         })
         // Firebase untuk humidity
-        val temperatureRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
-            .getReference("sensor/temperature")
+        val temperatureRef =
+            FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("sensor/temperature")
 
         temperatureRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -136,29 +145,50 @@ class DetailActivity : AppCompatActivity() {
             }
         })
 
+
         // Firebase untuk humidity
-        val SoilMoisturateRef = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
-            .getReference("sensor/soil_moisture")
+        val SoilMoisturateRef =
+            FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app")
+                .getReference("sensor/soil_moisture")
 
         SoilMoisturateRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val soilmoisture = snapshot.getValue(Int::class.java)
-                if (soilmoisture != null) {
-                    percentageSoilMoisture.text = "$soilmoisture%"
-                    barSoilMoisture.progress = soilmoisture
-                } else {
-                    percentageSoilMoisture.text = "Data tidak tersedia"
-                    barSoilMoisture.progress = 0
+                val soilmoisture = snapshot.getValue(Int::class.java) ?:0
+                percentageSoilMoisture.text = "$soilmoisture%"
+                barSoilMoisture.progress = soilmoisture
+                circularSoilMoisture.progress = soilmoisture
+                when {
+                    soilmoisture >= 70 -> {
+                        circularSoilMoisture.setIndicatorColor(Color.GREEN)
+                        statusSoilMoisture.text = "Ideal"
+                        statusSoilMoisture.setTextColor(Color.GREEN)
+                    }
+
+                    soilmoisture in 40..69 -> {
+                        circularSoilMoisture.setIndicatorColor(Color.YELLOW)
+                        statusSoilMoisture.text = "Waspada"
+                        statusSoilMoisture.setTextColor(Color.YELLOW)
+                    }
+
+                    else -> {
+                        circularSoilMoisture.setIndicatorColor(Color.RED)
+                        statusSoilMoisture.text = "Kering"
+                        statusSoilMoisture.setTextColor(Color.RED)
+                    }
                 }
             }
 
             override fun onCancelled(error: DatabaseError) {
-                percentageSoilMoisture.text = "Gagal memuat data humidity"
+                percentageSoilMoisture.text = "Gagal memuat data"
                 barSoilMoisture.progress = 0
+                circularSoilMoisture.progress = 0
+                statusSoilMoisture.text = "-"
+                statusSoilMoisture.setTextColor(Color.GRAY)
             }
         })
-
     }
+
+
 
 
     private fun setupBottomNav() {
