@@ -1,5 +1,6 @@
 package com.example.smartgarden
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -16,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.io.InputStream
 
 class PersonalInfoActivity : AppCompatActivity() {
 
@@ -25,13 +25,15 @@ class PersonalInfoActivity : AppCompatActivity() {
     private lateinit var btnBack: ImageButton
     private lateinit var profileImageView: ImageView
     private lateinit var btnChangeProfilePicture: Button
+    private lateinit var btnSaveChanges: Button
 
     private val db = FirebaseFirestore.getInstance()
     private val currentUser = FirebaseAuth.getInstance().currentUser
 
     private val IMAGE_REQUEST_CODE = 1000
-    private val PROFILE_IMAGE_NAME = "profile_picture.png"  // Nama file untuk foto profil
+    private val PROFILE_IMAGE_NAME = "profile_picture.png"
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personal_info)
@@ -42,29 +44,35 @@ class PersonalInfoActivity : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         profileImageView = findViewById(R.id.profileImage)
         btnChangeProfilePicture = findViewById(R.id.btnChangeProfilePicture)
+        btnSaveChanges = findViewById(R.id.btnSaveChanges)
 
-        // Menambahkan aksi tombol kembali
+        // Tombol kembali
         btnBack.setOnClickListener {
-            onBackPressed()  // Fungsi untuk kembali ke activity sebelumnya
+            onBackPressed()
         }
 
-        // Menambahkan aksi tombol untuk memilih foto
+        // Tombol pilih foto
         btnChangeProfilePicture.setOnClickListener {
-            openImagePicker()  // Fungsi untuk memilih foto
+            openImagePicker()
         }
 
-        // Mengecek apakah pengguna sudah login
+        // Tombol simpan perubahan
+        btnSaveChanges.setOnClickListener {
+            saveUserProfile()
+        }
+
+        // Cek login
         if (currentUser != null) {
             loadUserProfile(currentUser.uid)
         } else {
             Toast.makeText(this, "Pengguna tidak login", Toast.LENGTH_SHORT).show()
         }
 
-        // Memuat foto profil dari penyimpanan lokal (jika ada)
+        // Load foto profil
         loadProfileImage()
     }
 
-    // Fungsi untuk memuat profil pengguna dari Firestore
+    // Fungsi untuk load data user dari Firestore
     private fun loadUserProfile(userId: String) {
         db.collection("users").document(userId).get()
             .addOnSuccessListener { document ->
@@ -72,8 +80,8 @@ class PersonalInfoActivity : AppCompatActivity() {
                     val name = document.getString("name")
                     val email = document.getString("email")
 
-                    etName.setText(name ?: "Tidak tersedia")
-                    etEmail.setText(email ?: "Tidak tersedia")
+                    etName.setText(name ?: "")
+                    etEmail.setText(email ?: "")
                 } else {
                     Toast.makeText(this, "Data tidak ditemukan", Toast.LENGTH_SHORT).show()
                 }
@@ -83,14 +91,41 @@ class PersonalInfoActivity : AppCompatActivity() {
             }
     }
 
-    // Fungsi untuk membuka galeri atau kamera
+    // Fungsi untuk simpan data user ke Firestore
+    private fun saveUserProfile() {
+        val name = etName.text.toString().trim()
+        val email = etEmail.text.toString().trim()
+
+        if (name.isEmpty() || email.isEmpty()) {
+            Toast.makeText(this, "Nama dan Email tidak boleh kosong", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        currentUser?.uid?.let { userId ->
+            val userMap = hashMapOf(
+                "name" to name,
+                "email" to email
+            )
+
+            db.collection("users").document(userId)
+                .update(userMap as Map<String, Any>)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Profil berhasil diperbarui", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Gagal memperbarui profil", Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
+
+    // Fungsi untuk membuka galeri
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_REQUEST_CODE)
     }
 
-    // Menangani hasil dari pemilihan foto
+    // Fungsi hasil pilih gambar
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == RESULT_OK && requestCode == IMAGE_REQUEST_CODE) {
@@ -98,8 +133,8 @@ class PersonalInfoActivity : AppCompatActivity() {
             selectedImage?.let {
                 try {
                     val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, it)
-                    profileImageView.setImageBitmap(bitmap)  // Menampilkan gambar pada ImageView
-                    saveProfileImage(bitmap)  // Menyimpan gambar ke penyimpanan lokal
+                    profileImageView.setImageBitmap(bitmap)
+                    saveProfileImage(bitmap)
                 } catch (e: IOException) {
                     e.printStackTrace()
                     Toast.makeText(this, "Gagal memuat gambar", Toast.LENGTH_SHORT).show()
@@ -108,7 +143,7 @@ class PersonalInfoActivity : AppCompatActivity() {
         }
     }
 
-    // Fungsi untuk menyimpan gambar profil ke penyimpanan lokal
+    // Simpan foto profil ke penyimpanan lokal
     private fun saveProfileImage(bitmap: Bitmap) {
         val file = File(filesDir, PROFILE_IMAGE_NAME)
         try {
@@ -122,12 +157,12 @@ class PersonalInfoActivity : AppCompatActivity() {
         }
     }
 
-    // Fungsi untuk memuat gambar profil dari penyimpanan lokal
+    // Load foto profil dari penyimpanan lokal
     private fun loadProfileImage() {
         val file = File(filesDir, PROFILE_IMAGE_NAME)
         if (file.exists()) {
             val bitmap = BitmapFactory.decodeFile(file.absolutePath)
-            profileImageView.setImageBitmap(bitmap)  // Menampilkan gambar yang disimpan
+            profileImageView.setImageBitmap(bitmap)
         }
     }
 }

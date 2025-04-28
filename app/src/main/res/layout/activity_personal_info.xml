@@ -160,6 +160,17 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <!-- Tombol Simpan Perubahan -->
+            <Button
+                android:id="@+id/btnSaveChanges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="Simpan Perubahan"
+                android:backgroundTint="@color/green"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
