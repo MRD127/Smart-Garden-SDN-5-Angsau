@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:gravity="center">
+
+    <!-- Logo tanpa padding dan tanpa elevation -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="231dp"
+        android:layout_height="226dp"
+        android:layout_centerInParent="true"
+        android:elevation="0dp"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/splash_logo"
+        android:contentDescription="@string/logo_description" />
+
+
+    <!-- Loading (jika nanti dibutuhkan) -->
+    <ProgressBar
+        android:id="@+id/loadingProgressBar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/logoImageView"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        android:visibility="gone"
+        android:indeterminateTint="#37B843"/>
+</RelativeLayout>

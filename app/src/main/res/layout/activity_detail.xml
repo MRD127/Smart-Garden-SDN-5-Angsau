@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F1F1F1"
+    tools:context=".DetailActivity">
+
+    <!-- Scrollable content -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Background pojok kanan atas -->
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="83dp"
+                android:layout_height="86dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_profiles" />
+
+            <!-- Header -->
+            <ImageView
+                android:id="@+id/imageViewHeader"
+                android:layout_width="193dp"
+                android:layout_height="130dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_shapes"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Image Container -->
+            <FrameLayout
+                android:id="@+id/imageContainer"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintTop_toBottomOf="@id/imageViewHeader"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintDimensionRatio="16:6">
+
+                <ImageView
+                    android:id="@+id/imageView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_rectangle" />
+
+                <ImageView
+                    android:id="@+id/imageView12"
+                    android:layout_width="149dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/ic_my_location_text" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:layout_marginEnd="30dp"
+                    android:gravity="center"
+                    android:text="30°C"
+                    android:textColor="#FFFFFF"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <!-- Segmented Control -->
+            <FrameLayout
+                android:id="@+id/frameSegmentedControl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/imageContainer"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_height="56dp"
+                    android:contentDescription="@string/segmented_control"
+                    app:srcCompat="@drawable/ic_segmented_control" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="134dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/detail_taman_text"
+                    android:src="@drawable/ic_detail_taman_text" />
+            </FrameLayout>
+
+            <!-- Sensor kiri atas -->
+            <FrameLayout
+                android:id="@+id/frameSensorKiri"
+                android:layout_width="0dp"
+                android:layout_height="188dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toBottomOf="@id/frameSegmentedControl"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/frameSensorKanan">
+
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_rectangle_sensor" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center"
+                    android:text="100 %"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView15"
+                    android:layout_width="84dp"
+                    android:layout_height="66dp"
+                    android:layout_gravity="center_vertical|end"
+                    app:srcCompat="@drawable/ic_kelembaban" />
+
+                <ImageView
+                    android:id="@+id/imageView27"
+                    android:layout_width="131dp"
+                    android:layout_height="61dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    app:srcCompat="@drawable/ic_kelembaban_taman_1" />
+
+
+            </FrameLayout>
+
+            <!-- Sensor kanan atas -->
+            <FrameLayout
+                android:id="@+id/frameSensorKanan"
+                android:layout_width="0dp"
+                android:layout_height="188dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/frameSegmentedControl"
+                app:layout_constraintStart_toEndOf="@id/frameSensorKiri"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView16"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_rectangle_sensor" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center"
+                    android:text="100 %"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView25"
+                    android:layout_width="84dp"
+                    android:layout_height="66dp"
+                    android:layout_gravity="center_vertical|end"
+                    app:srcCompat="@drawable/ic_kelembaban" />
+
+                <ImageView
+                    android:id="@+id/imageView28"
+                    android:layout_width="131dp"
+                    android:layout_height="61dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    app:srcCompat="@drawable/ic_kelembaban_taman_2" />
+            </FrameLayout>
+
+            <!-- Sensor kiri bawah -->
+            <FrameLayout
+                android:id="@+id/frameSensorKiriBawah"
+                android:layout_width="0dp"
+                android:layout_height="188dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toBottomOf="@id/frameSensorKanan"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/frameSensorKananBawah">
+
+                <ImageView
+                    android:id="@+id/imageView18"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_rectangle_sensor" />
+
+                <ImageView
+                    android:id="@+id/imageView29"
+                    android:layout_width="84dp"
+                    android:layout_height="66dp"
+                    android:layout_gravity="center_vertical|end"
+                    app:srcCompat="@drawable/ic_kelembapan_udara" />
+
+                <TextView
+                    android:id="@+id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center"
+                    android:text="100 %"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView26"
+                    android:layout_width="131dp"
+                    android:layout_height="61dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    app:srcCompat="@drawable/ic_kelembaban_udara_text" />
+            </FrameLayout>
+
+            <!-- Sensor kanan bawah -->
+            <FrameLayout
+                android:id="@+id/frameSensorKananBawah"
+                android:layout_width="0dp"
+                android:layout_height="188dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/frameSensorKanan"
+                app:layout_constraintStart_toEndOf="@id/frameSensorKiriBawah"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView20"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_rectangle_sensor" />
+
+                <ImageView
+                    android:id="@+id/imageView31"
+                    android:layout_width="84dp"
+                    android:layout_height="66dp"
+                    android:layout_gravity="center_vertical|end"
+                    app:srcCompat="@drawable/ic_suhu_udara_icon" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center"
+                    android:text="100 %"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView30"
+                    android:layout_width="131dp"
+                    android:layout_height="61dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    app:srcCompat="@drawable/ic_suhu_udara" />
+            </FrameLayout>
+            <!-- Sensor kiri paling bawah -->
+            <FrameLayout
+                android:id="@+id/frameSensorKiriPalingBawah"
+                android:layout_width="0dp"
+                android:layout_height="188dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintTop_toBottomOf="@id/frameSensorKiriBawah"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/frameSensorKananPalingBawah">
+
+                <ImageView
+                    android:id="@+id/imageView22"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_rectangle_sensor" />
+
+                <ImageView
+                    android:id="@+id/imageView33"
+                    android:layout_width="100dp"
+                    android:layout_height="52dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="4dp"
+                    app:srcCompat="@drawable/ic_intensitas_cahaya_text" />
+
+                <ImageView
+                    android:id="@+id/imageView32"
+                    android:layout_width="74dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    app:srcCompat="@drawable/ic_intensitas_cahaya" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center"
+                    android:text="100 %"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+            <!-- Sensor kanan paling bawah -->
+            <FrameLayout
+                android:id="@+id/frameSensorKananPalingBawah"
+                android:layout_width="0dp"
+                android:layout_height="188dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/frameSensorKananBawah"
+                app:layout_constraintStart_toEndOf="@id/frameSensorKiriPalingBawah"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView24"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/ic_rectangle_sensor" />
+
+                <ImageView
+                    android:id="@+id/imageView36"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="top|start"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/ic_status_pompa_text" />
+
+                <ImageView
+                    android:id="@+id/imageView35"
+                    android:layout_width="84dp"
+                    android:layout_height="66dp"
+                    android:layout_gravity="center_vertical|end"
+                    app:srcCompat="@drawable/ic_pump" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|start"
+                    android:layout_marginStart="16dp"
+                    android:gravity="center"
+                    android:text="ON"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </FrameLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#5CC168"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/white"
+        app:itemIconSize="32dp"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

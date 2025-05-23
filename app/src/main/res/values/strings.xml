@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Smart Garden</string>
+    <string name="logo_description">Logo Smart Garden</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="lihat_password">Lihat Password</string>
+    <string name="login">Login</string>
+    <string name="belum_punya_akun">Belum Punya Akun</string>
+    <string name="daftar">Daftar</string>
+    <string name="masuk">Masuk</string>
+    <string name="segmented_control">Segmented Control</string>
+    <string name="detail_taman_text">Detail Taman Text</string>
+</resources>
