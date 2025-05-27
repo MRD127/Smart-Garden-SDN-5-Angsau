@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private boolean isPasswordVisible = false;
 
     private FirebaseAuth mAuth;
+    TextView lupaPasswordLink;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         showPasswordIcon = findViewById(R.id.showPasswordIcon);
         loginButton = findViewById(R.id.loginButton);
         registerText = findViewById(R.id.registerText);
+        lupaPasswordLink = findViewById(R.id.lgnlupapassword);
 
         // Toggle password visibility
         showPasswordIcon.setOnClickListener(v -> {
@@ -83,5 +85,10 @@ public class LoginActivity extends AppCompatActivity {
         registerText.setOnClickListener(v -> {
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
+        lupaPasswordLink.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+            startActivity(intent);
+        });
+
     }
 }

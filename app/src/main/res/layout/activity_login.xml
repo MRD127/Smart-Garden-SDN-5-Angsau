@@ -68,13 +68,13 @@
                 android:inputType="textEmailAddress"
                 android:textColor="@android:color/black"
                 android:textColorHint="#999" />
-
             <!-- Input Password -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/input_background">
+                android:background="@drawable/input_background"
+                android:id="@+id/passwordLayout">
 
                 <EditText
                     android:id="@+id/passwordEditText"
@@ -99,12 +99,25 @@
                     android:contentDescription="@string/lihat_password" />
             </RelativeLayout>
 
+            <!-- Lupa Password Link -->
+            <TextView
+                android:id="@+id/lgnlupapassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lupa kata sandi?"
+                android:textSize="14sp"
+                android:textColor="#0000FF"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="8dp" />
+
             <!-- Tombol Login -->
             <Button
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="15dp"
                 android:text="@string/login"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"
