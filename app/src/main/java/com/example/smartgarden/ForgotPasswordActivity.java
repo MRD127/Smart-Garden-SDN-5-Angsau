@@ -1,15 +1,13 @@
 package com.example.smartgarden;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -17,6 +15,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private EditText emailInput;
     private Button resetButton;
+    private TextView backToLoginText;
     private FirebaseAuth auth;
 
     @Override
@@ -30,7 +29,9 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         // Referensi ke elemen UI
         emailInput = findViewById(R.id.fpsemail);
         resetButton = findViewById(R.id.fpsreset);
+        backToLoginText = findViewById(R.id.backToLoginText); // Tambahkan ini
 
+        // Aksi tombol reset password
         resetButton.setOnClickListener(view -> {
             String email = emailInput.getText().toString().trim();
 
@@ -44,12 +45,19 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(ForgotPasswordActivity.this, "Link reset telah dikirim ke email kamu", Toast.LENGTH_LONG).show();
-                            finish(); // Kembali ke halaman sebelumnya (misalnya login)
+                            finish(); // Menutup activity, kembali ke login
                         } else {
                             String errorMsg = (task.getException() != null) ? task.getException().getMessage() : "Terjadi kesalahan";
                             Toast.makeText(ForgotPasswordActivity.this, "Gagal mengirim reset: " + errorMsg, Toast.LENGTH_LONG).show();
                         }
                     });
+        });
+
+        // Aksi ketika "Masuk" ditekan
+        backToLoginText.setOnClickListener(view -> {
+            Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish(); // Supaya user tidak bisa kembali ke halaman ini dengan tombol back
         });
     }
 }
