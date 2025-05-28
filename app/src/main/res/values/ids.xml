@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="settingTitle" type="id" />
+    <item name="settingDesc" type="id" />
+    <item name="settingIcon" type="id" />
+</resources>
