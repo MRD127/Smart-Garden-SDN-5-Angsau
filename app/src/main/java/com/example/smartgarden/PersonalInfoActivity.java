@@ -66,9 +66,6 @@ public class PersonalInfoActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Pengguna tidak login", Toast.LENGTH_SHORT).show();
         }
-
-        loadProfileImage();
-        setupBottomNavigation();
     }
 
     private void loadUserProfile(String userId) {
@@ -156,32 +153,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
         }
     }
 
-    private void setupBottomNavigation() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setSelectedItemId(R.id.setting); // Tandai item aktif
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if (id == R.id.home) {
-                    startActivity(new Intent(PersonalInfoActivity.this, DasboardActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (id == R.id.detail) {
-                    startActivity(new Intent(PersonalInfoActivity.this, DetailActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (id == R.id.history) {
-                    startActivity(new Intent(PersonalInfoActivity.this, HistoryActivity.class));
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (id == R.id.setting) {
-                    // Sudah di halaman ini
-                    return true;
-                }
-                return false;
-            }
-        });
+
     }
-}
+
