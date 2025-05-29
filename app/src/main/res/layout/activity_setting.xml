@@ -147,6 +147,7 @@
 
             <!-- Help -->
             <LinearLayout
+                android:id="@+id/layout_help"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -177,7 +178,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Dara preferences and storage settings"
+                        android:text="Data preferences and storage settings"
                         android:textColor="#777777"
                         android:textSize="12sp"/>
                 </LinearLayout>
@@ -187,17 +188,19 @@
                     android:layout_height="24dp"
                     android:src="@drawable/ic_arrow_right_setting"/>
             </LinearLayout>
-
             <!-- About -->
             <LinearLayout
+                android:id="@+id/layout_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:padding="12dp"
                 android:background="#F0F0F0"
+                android:layout_marginBottom="16dp"
                 android:gravity="center_vertical">
 
-                <ImageView
+
+            <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_about_setting"
@@ -243,9 +246,5 @@
         app:itemIconTint="@color/white"
         app:itemTextColor="@color/white"
         app:itemIconSize="32dp"
-        app:menu="@menu/bottom_nav_menu"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:menu="@menu/bottom_nav_menu" />
 </LinearLayout>

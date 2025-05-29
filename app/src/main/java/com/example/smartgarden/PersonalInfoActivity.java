@@ -11,16 +11,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import android.view.MenuItem;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,6 +29,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
     private EditText etName, etEmail;
     private ImageView profileImageView;
     private Button btnChangeProfilePicture, btnSaveChanges;
+    private ImageView btnBack;
 
     private final FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -51,6 +48,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
         profileImageView = findViewById(R.id.profileImage);
         btnChangeProfilePicture = findViewById(R.id.btnChangeProfilePicture);
         btnSaveChanges = findViewById(R.id.btnSaveChanges);
+        btnBack = findViewById(R.id.btnBack);
 
         // Buat email tidak bisa diedit
         etEmail.setFocusable(false);
@@ -61,8 +59,12 @@ public class PersonalInfoActivity extends AppCompatActivity {
         btnChangeProfilePicture.setOnClickListener(v -> openImagePicker());
         btnSaveChanges.setOnClickListener(v -> saveUserProfile());
 
+        // Tombol kembali
+        btnBack.setOnClickListener(v -> finish());
+
         if (currentUser != null) {
             loadUserProfile(currentUser.getUid());
+            loadProfileImage(); // juga muat gambar profil jika tersedia
         } else {
             Toast.makeText(this, "Pengguna tidak login", Toast.LENGTH_SHORT).show();
         }
@@ -88,7 +90,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
 
     private void saveUserProfile() {
         String name = etName.getText().toString().trim();
-        String email = etEmail.getText().toString().trim(); // Tetap ambil email untuk validasi jika perlu
+        String email = etEmail.getText().toString().trim();
 
         if (name.isEmpty() || email.isEmpty()) {
             Toast.makeText(this, "Nama dan Email tidak boleh kosong", Toast.LENGTH_SHORT).show();
@@ -99,7 +101,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
             String userId = currentUser.getUid();
             Map<String, Object> userMap = new HashMap<>();
             userMap.put("name", name);
-            // Email tidak diperbarui di sini
+
             db.collection("users").document(userId)
                     .update(userMap)
                     .addOnSuccessListener(aVoid ->
@@ -152,8 +154,4 @@ public class PersonalInfoActivity extends AppCompatActivity {
             profileImageView.setImageBitmap(bitmap);
         }
     }
-
-
-
-    }
-
+}

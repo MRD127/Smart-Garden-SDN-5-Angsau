@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -13,8 +15,6 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import android.view.MenuItem;
-import android.widget.LinearLayout;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -33,13 +33,29 @@ public class SettingActivity extends AppCompatActivity {
             return insets;
         });
 
-
+        // Navigasi ke halaman Personal Info
         LinearLayout personalInfoLayout = findViewById(R.id.layout_personal_info);
         personalInfoLayout.setOnClickListener(v -> {
             Intent intent = new Intent(SettingActivity.this, PersonalInfoActivity.class);
             startActivity(intent);
         });
 
+        // Navigasi ke halaman Help
+        LinearLayout helpLayout = findViewById(R.id.layout_help);
+        helpLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingActivity.this, HelpActivity.class);
+            startActivity(intent);
+        });
+
+        // Navigasi ke halaman About
+        LinearLayout aboutLayout = findViewById(R.id.layout_about);
+        aboutLayout.setOnClickListener(v -> {
+            Intent intent = new Intent(SettingActivity.this, AboutActivity.class);
+            startActivity(intent);
+        });
+
+
+        // Bottom Navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.setting);
 
@@ -57,7 +73,6 @@ public class SettingActivity extends AppCompatActivity {
                     startActivity(new Intent(SettingActivity.this, HistoryActivity.class));
                     return true;
                 } else if (id == R.id.setting) {
-                    // Sudah di halaman setting
                     return true;
                 }
                 return false;

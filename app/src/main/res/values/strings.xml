@@ -11,4 +11,5 @@
     <string name="segmented_control">Segmented Control</string>
     <string name="detail_taman_text">Detail Taman Text</string>
     <string name="more" />
+    <string name="setting" />
 </resources>

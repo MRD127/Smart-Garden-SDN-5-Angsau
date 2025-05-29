@@ -9,42 +9,58 @@
     android:background="@color/white"
     tools:context=".PersonalInfoActivity">
 
-    <!-- Bagian Header -->
-    <LinearLayout
-        android:id="@+id/headerLayout"
+    <!-- Bagian Header dengan tombol kembali -->
+    <FrameLayout
+        android:id="@+id/headerContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingBottom="2dp">
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-            android:id="@+id/imageViewHeader"
-            android:layout_width="193dp"
-            android:layout_height="130dp"
-            android:layout_gravity="left"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_shapes" />
+        <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:paddingBottom="2dp">
 
+            <ImageView
+                android:id="@+id/imageViewHeader"
+                android:layout_width="193dp"
+                android:layout_height="130dp"
+                android:layout_gravity="left"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_shapes" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="89dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-80dp"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/ic_profil_text" />
+        </LinearLayout>
+
+        <!-- Tombol kembali kanan atas -->
         <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="89dp"
-            android:layout_height="22dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="-80dp"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/ic_profil_text" />
-    </LinearLayout>
+            android:id="@+id/btnBack"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="end|top"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_back"
+            android:contentDescription="Kembali" />
+    </FrameLayout>
 
     <!-- Konten Scrollable -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintTop_toBottomOf="@id/headerContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -162,4 +178,5 @@
 
         </LinearLayout>
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
