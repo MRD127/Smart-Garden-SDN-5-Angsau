@@ -5,15 +5,111 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
+
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class DasboardActivity extends AppCompatActivity {
+    private TextView textViewWeather;
+    private final String API_KEY = "47730936a35a0e34ea8ecbf7e9945d19"; // Ganti dengan API key Anda
+    private final String CITY_NAME = "Pelaihari";
+
+    private TextView textCityName, textTemp, textDesc, textTemp1;
+    private ImageView imageWeather;
+
+    private FirebaseDatabase database;
+    private TextView textCahaya, textTaman1, textTaman2, textKelembabanUdara, textSuhuUdara;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dasboard);
+        // Inisialisasi TextView dan ImageView dari layout
+        textCityName = findViewById(R.id.textCityName);
+        textTemp = findViewById(R.id.textTemp);
+        textTemp1 = findViewById(R.id.textTemp1);
+        textDesc = findViewById(R.id.textDesc);
+        imageWeather = findViewById(R.id.imageWeather);
 
+
+        // Inisialisasi TextView Sensor
+        textCahaya = findViewById(R.id.textCahaya);
+        textTaman1 = findViewById(R.id.textTaman1);
+        textTaman2 = findViewById(R.id.textTaman2);
+        textKelembabanUdara = findViewById(R.id.textKelembabanUdara);
+        textSuhuUdara = findViewById(R.id.textSuhuUdara);
+
+        // Inisialisasi Firebase
+        database = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app");
+
+        DatabaseReference sensorRef = database.getReference("Sensor");
+        sensorRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // Cahaya
+                Integer cahaya = snapshot.child("Cahaya").getValue(Integer.class);
+                if (cahaya != null) {
+                    textCahaya.setText(cahaya + " lx");
+                } else {
+                    textCahaya.setText("Data tidak tersedia");
+                }
+
+                // Taman 1
+                Integer taman1 = snapshot.child("Kelembapan_Tanah").child("Taman_1").getValue(Integer.class);
+                if (taman1 != null) {
+                    textTaman1.setText(taman1 + " %");
+                } else {
+                    textTaman1.setText("Data tidak tersedia");
+                }
+
+                // Taman 2
+                Integer taman2 = snapshot.child("Kelembapan_Tanah").child("Taman_2").getValue(Integer.class);
+                if (taman2 != null) {
+                    textTaman2.setText(taman2 + " %");
+                } else {
+                    textTaman2.setText("Data tidak tersedia");
+                }
+
+                // Kelembaban Udara
+                Double kelembabanUdara = snapshot.child("Kelembapan_Udara").getValue(Double.class);
+                if (kelembabanUdara != null) {
+                    textKelembabanUdara.setText(kelembabanUdara + "%");
+                } else {
+                    textKelembabanUdara.setText("Data tidak tersedia");
+                }
+
+                // Suhu Udara
+                Double suhuUdara = snapshot.child("Suhu_Udara").getValue(Double.class);
+                if (suhuUdara != null) {
+                    textSuhuUdara.setText(suhuUdara + "°C");
+                } else {
+                    textSuhuUdara.setText("Data tidak tersedia");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                textCahaya.setText("Gagal");
+                textTaman1.setText("Gagal");
+                textTaman2.setText("Gagal");
+                textKelembabanUdara.setText("Gagal");
+                textSuhuUdara.setText("Gagal");
+            }
+        });
+        loadWeather();
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -38,4 +134,45 @@ public class DasboardActivity extends AppCompatActivity {
             }
         });
     }
+    private void loadWeather() {
+        WeatherService service = RetrofitInstance.getWeatherService();
+        Call<WeatherResponse> call = service.getWeather(CITY_NAME, API_KEY, "metric");
+
+        call.enqueue(new Callback<WeatherResponse>() {
+            @Override
+            public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    WeatherResponse weather = response.body();
+                    double temp = weather.getMain().getTemp();
+                    String description = weather.getWeather().get(0).getDescription();
+                    String iconCode = weather.getWeather().get(0).getIcon();
+
+                    textCityName.setText(weather.getName());
+                    textTemp.setText(String.format("%.0f°C", temp));
+                    textDesc.setText(capitalize(description));
+                    textTemp1.setText(String.format("%.0f°C", temp));
+
+                    String iconUrl = "https://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+                    Picasso.get().load(iconUrl).into(imageWeather);
+                } else {
+                    textTemp.setText("?");
+                    textDesc.setText("Gagal memuat cuaca");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WeatherResponse> call, Throwable t) {
+                textTemp.setText("?");
+                textDesc.setText("Error: " + t.getMessage());
+            }
+        });
+    }
+
+    private String capitalize(String str) {
+        if (str == null || str.length() == 0) return str;
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }
 }
+
+
+
