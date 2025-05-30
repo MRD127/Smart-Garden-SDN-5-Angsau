@@ -12,7 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        android:fillViewport="true">
+        android:fillViewport="true"
+        android:transitionGroup="false">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -175,6 +176,12 @@
                                     android:layout_height="wrap_content"
                                     android:src="@drawable/_0250527_1448_ikon_matahari_remix_01jw87x78aeqq8bv5fyfn06f3x" />
                             </LinearLayout>
+
+                            <ImageView
+                                android:id="@+id/imageView10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_pump" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -229,6 +236,23 @@
                                     android:textColor="#7C7B7B"
                                     android:textSize="18sp" />
                             </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginTop="10dp"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Pompa air"
+                                    android:textAlignment="textStart"
+                                    android:textColor="#787878"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
                         </LinearLayout>
 
                         <LinearLayout
@@ -270,7 +294,7 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="63dp"
+                                android:layout_height="57dp"
                                 android:orientation="vertical">
 
                                 <TextView
@@ -281,6 +305,25 @@
                                     android:textAlignment="center"
                                     android:textColor="#FFC107"
                                     android:textSize="34sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="93dp"
+                                android:layout_height="32dp"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/bg_shadow"
+                                android:elevation="8dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView13"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="OFF"
+                                    android:textAlignment="center"
+                                    android:textSize="20sp" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>

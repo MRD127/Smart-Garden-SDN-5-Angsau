@@ -17,6 +17,7 @@ import android.widget.Button;
 public class DetailActivity extends AppCompatActivity {
     private boolean showingGarden1 = true; // Default: Garden 1
     private Button switchGardenButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,26 +61,33 @@ public class DetailActivity extends AppCompatActivity {
         switchGardenButton.setOnClickListener(v -> toggleGarden());
 
         // Set teks awal tombol
-        switchGardenButton.setText("Garden 2 ➤");
+        switchGardenButton.setText("Taman 2 ➤");
     }
 
     private void toggleGarden() {
+        Fragment fragment;
+
         if (showingGarden1) {
-            // Ganti ke Garden 2
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new DetailFragment2())
-                    .commit();
-            switchGardenButton.setText("⬅ Garden 1");
+            fragment = new DetailFragment2();
+            switchGardenButton.setText("⬅ Taman 1");
         } else {
-            // Ganti ke Garden 1
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, new DetailFragment())
-                    .commit();
-            switchGardenButton.setText("Garden 2 ➤");
+            fragment = new DetailFragment();
+            switchGardenButton.setText("Taman 2 ➤");
         }
-        showingGarden1 = !showingGarden1; // Toggle status
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(
+                        R.anim.slide_in_right,
+                        R.anim.slide_out_left,
+                        R.anim.slide_in_left,
+                        R.anim.slide_out_right
+                )
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+
+        showingGarden1 = !showingGarden1;
     }
 }
 

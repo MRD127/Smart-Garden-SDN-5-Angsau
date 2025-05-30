@@ -105,6 +105,8 @@ public class DetailFragment extends Fragment {
         // Kembalikan view yang sudah diinisialisasi
         return view;
     }
+
+
 }
 
 
