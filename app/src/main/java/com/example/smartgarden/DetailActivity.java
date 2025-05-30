@@ -40,5 +40,11 @@ public class DetailActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new DetailFragment())
+                .commit();
+
     }
 }
