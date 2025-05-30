@@ -23,17 +23,6 @@
             android:orientation="vertical"
             android:padding="0dp">
 
-            <!-- Gambar Tanaman -->
-
-            <!-- Status: Healthy -->
-
-            <!-- Moisture -->
-
-            <!-- Humidity & Temperature -->
-
-            <!-- Water Pump Button -->
-
-            <!-- Switch Garden -->
 
             <FrameLayout
                 android:id="@+id/fragment_container"
@@ -49,17 +38,11 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:text="Switch Garden 1"
-                    android:textSize="14sp" />
-
                 <Button
                     android:id="@+id/switchGardenButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#42894B"
                     android:text="Garden 2 ➤" />
             </LinearLayout>
 

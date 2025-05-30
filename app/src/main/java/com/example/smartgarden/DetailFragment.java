@@ -16,6 +16,7 @@ import com.squareup.picasso.Picasso;
 
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import retrofit2.Call;
@@ -37,7 +38,7 @@ public class DetailFragment extends Fragment {
 
     private FirebaseDatabase database;
     private TextView textCahaya, textTaman1, textKelembabanUdara, textSuhuUdara;
-
+    private ProgressBar progressBar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class DetailFragment extends Fragment {
         textTaman1 = view.findViewById(R.id.textTaman1);
         textKelembabanUdara = view.findViewById(R.id.textKelembabanUdara);
         textSuhuUdara = view.findViewById(R.id.textSuhuUdara);
-
+        progressBar = view.findViewById(R.id.progressBar);
         // Inisialisasi Firebase
         database = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app");
 
@@ -65,12 +66,14 @@ public class DetailFragment extends Fragment {
                     textCahaya.setText("Data tidak tersedia");
                 }
 
-                // Taman 1
+                // Taman 2 (kelembapan tanah)
                 Integer taman1 = snapshot.child("Kelembapan_Tanah").child("Taman_1").getValue(Integer.class);
                 if (taman1 != null) {
-                    textTaman1.setText(taman1 + " %");
+                    textTaman1.setText(taman1 + "%");
+                    progressBar.setProgress(taman1); // Update progress bar
                 } else {
                     textTaman1.setText("Data tidak tersedia");
+                    progressBar.setProgress(0); // Reset jika data tidak ada
                 }
 
                 // Kelembaban Udara
