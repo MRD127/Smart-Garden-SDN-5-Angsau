@@ -1,6 +1,8 @@
 package com.example.smartgarden;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,8 +39,9 @@ import com.google.firebase.database.ValueEventListener;
 
         private FirebaseDatabase database;
         private TextView textCahaya, textTaman2, textKelembabanUdara, textSuhuUdara;
-
+        private TextView textPumpAir;
         private ProgressBar progressBar2; // Tambahkan ini
+        @SuppressLint("MissingInflatedId")
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -47,14 +50,33 @@ import com.google.firebase.database.ValueEventListener;
 
             // Inisialisasi TextView Sensor
             textCahaya = view.findViewById(R.id.textCahaya);
+            textPumpAir = view.findViewById(R.id.textPumpAir2);
             textTaman2 = view.findViewById(R.id.textTaman2);
             textKelembabanUdara = view.findViewById(R.id.textKelembabanUdara);
             textSuhuUdara = view.findViewById(R.id.textSuhuUdara);
             progressBar2 = view.findViewById(R.id.progressBar2);
             // Inisialisasi Firebase
             database = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app");
-
+            DatabaseReference taman2RelayRef = database.getReference("Control").child("Relay").child("Taman_1");
             DatabaseReference sensorRef = database.getReference("Sensor");
+
+            //Baca data realtime dari Firebase
+            taman2RelayRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Boolean status = snapshot.getValue(Boolean.class);
+                    if (status != null) {
+                        textPumpAir.setText(status ? "ON" : "OFF");
+                    } else {
+                        textPumpAir.setText("No Data");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("Firebase", "Gagal membaca data Taman_1", error.toException());
+                }
+            });
             sensorRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -54,7 +54,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="133dp"
+                        android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
                         <LinearLayout
@@ -67,11 +67,26 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical">
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="43dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/textView17"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:fontFamily="@font/poppins_semibold"
+                                        android:text="Taman 1"
+                                        android:textColor="#4CAF50"
+                                        android:textSize="34sp" />
+                                </LinearLayout>
+
                                 <TextView
                                     android:id="@+id/textView2"
                                     android:layout_width="277dp"
                                     android:layout_height="32dp"
-                                    android:fontFamily="@font/poppins_medium"
+                                    android:fontFamily="@font/poppins_semibold"
                                     android:text="Kelembaban Tanah"
                                     android:textSize="25sp" />
 
@@ -112,7 +127,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="15dp"
+                                android:layout_marginTop="80dp"
                                 android:background="@drawable/bg_card"
                                 android:orientation="vertical">
 
@@ -120,8 +135,8 @@
                                     android:id="@+id/textView10"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
-                                    android:layout_marginTop="10dp"
-                                    android:fontFamily="@font/poppins_light"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/poppins_medium"
                                     android:text="Ideal"
                                     android:textAlignment="center"
                                     android:textColor="#FBFAFA"
@@ -181,7 +196,7 @@
                                 android:id="@+id/imageView10"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/ic_pump" />
+                                android:src="@drawable/pompa1" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -248,7 +263,7 @@
                                     android:layout_height="match_parent"
                                     android:layout_marginTop="10dp"
                                     android:fontFamily="@font/poppins_medium"
-                                    android:text="Pompa air"
+                                    android:text="Mesin Pompa air"
                                     android:textAlignment="textStart"
                                     android:textColor="#787878"
                                     android:textSize="18sp" />
@@ -312,17 +327,18 @@
                                 android:layout_height="32dp"
                                 android:layout_marginStart="15dp"
                                 android:layout_marginTop="10dp"
-                                android:background="@drawable/bg_shadow"
+                                android:background="@drawable/bg_pompa"
                                 android:elevation="8dp"
                                 android:orientation="vertical">
 
                                 <TextView
-                                    android:id="@+id/textView13"
+                                    android:id="@+id/textPumpAir"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:fontFamily="@font/poppins_medium"
-                                    android:text="OFF"
+                                    android:text="1"
                                     android:textAlignment="center"
+                                    android:textColor="#F4F2F2"
                                     android:textSize="20sp" />
                             </LinearLayout>
                         </LinearLayout>
