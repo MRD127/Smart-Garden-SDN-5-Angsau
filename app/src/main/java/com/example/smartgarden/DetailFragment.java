@@ -1,6 +1,7 @@
 package com.example.smartgarden;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,11 +37,12 @@ public class DetailFragment extends Fragment {
     public DetailFragment() {
         // Required empty public constructor
     }
-
+    private TextView textStatusTaman1;
     private FirebaseDatabase database;
     private TextView textCahaya, textTaman1, textKelembabanUdara, textSuhuUdara;
     private TextView textPumpAir;
     private ProgressBar progressBar;
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class DetailFragment extends Fragment {
         textKelembabanUdara = view.findViewById(R.id.textKelembabanUdara);
         textSuhuUdara = view.findViewById(R.id.textSuhuUdara);
         progressBar = view.findViewById(R.id.progressBar);
+
+        textStatusTaman1 = view.findViewById(R.id.textStatusTaman1);
         // Inisialisasi Firebase
         database = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app");
         DatabaseReference sensorRef = database.getReference("Sensor");
@@ -96,6 +100,7 @@ public class DetailFragment extends Fragment {
                 if (taman1 != null) {
                     textTaman1.setText(taman1 + "%");
                     progressBar.setProgress(taman1); // Update progress bar
+                    updateStatusText(textStatusTaman1, taman1);
                 } else {
                     textTaman1.setText("Data tidak tersedia");
                     progressBar.setProgress(0); // Reset jika data tidak ada
@@ -131,7 +136,30 @@ public class DetailFragment extends Fragment {
         return view;
     }
 
+    private void updateStatusText(TextView statusView, int value) {
+        // Set font Poppins SemiBold
 
+
+        if (value < 30) {
+            statusView.setText("Rendah");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        } else if (value < 50) {
+            statusView.setText("Minim");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        } else if (value <= 70) {
+            statusView.setText("Ideal");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        } else if (value <= 85) {
+            statusView.setText("Tinggi");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        } else {
+            statusView.setText("Tinggi");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        }
+    }
 }
+
+
+
 
 

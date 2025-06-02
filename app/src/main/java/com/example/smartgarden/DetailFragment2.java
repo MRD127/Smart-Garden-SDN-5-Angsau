@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
@@ -36,7 +37,7 @@ import com.google.firebase.database.ValueEventListener;
     public class DetailFragment2 extends Fragment {
         public DetailFragment2() {
         }
-
+        private TextView textStatusTaman2;
         private FirebaseDatabase database;
         private TextView textCahaya, textTaman2, textKelembabanUdara, textSuhuUdara;
         private TextView textPumpAir;
@@ -55,6 +56,9 @@ import com.google.firebase.database.ValueEventListener;
             textKelembabanUdara = view.findViewById(R.id.textKelembabanUdara);
             textSuhuUdara = view.findViewById(R.id.textSuhuUdara);
             progressBar2 = view.findViewById(R.id.progressBar2);
+
+            textStatusTaman2 = view.findViewById(R.id.textStatusTaman2);
+
             // Inisialisasi Firebase
             database = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app");
             DatabaseReference taman2RelayRef = database.getReference("Control").child("Relay").child("Taman_1");
@@ -89,6 +93,7 @@ import com.google.firebase.database.ValueEventListener;
                     if (taman2 != null) {
                         textTaman2.setText(taman2 + "%");
                         progressBar2.setProgress(taman2); // Update progress bar
+                        updateStatusText(textStatusTaman2, taman2);
                     } else {
                         textTaman2.setText("Data tidak tersedia");
                         progressBar2.setProgress(0); // Reset jika data tidak ada
@@ -114,6 +119,28 @@ import com.google.firebase.database.ValueEventListener;
             });
 
             return view; // Return view yang sudah di-setup
+        }
+
+        private void updateStatusText(TextView statusView, int value) {
+            // Set font Poppins SemiBold
+
+
+            if (value < 30) {
+                statusView.setText("Rendah");
+                statusView.setTextColor(getResources().getColor(android.R.color.white));
+            } else if (value < 50) {
+                statusView.setText("Minim");
+                statusView.setTextColor(getResources().getColor(android.R.color.white));
+            } else if (value <= 70) {
+                statusView.setText("Ideal");
+                statusView.setTextColor(getResources().getColor(android.R.color.white));
+            } else if (value <= 85) {
+                statusView.setText("Tinggi");
+                statusView.setTextColor(getResources().getColor(android.R.color.white));
+            } else {
+                statusView.setText("Tinggi");
+                statusView.setTextColor(getResources().getColor(android.R.color.white));
+            }
         }
     }
 

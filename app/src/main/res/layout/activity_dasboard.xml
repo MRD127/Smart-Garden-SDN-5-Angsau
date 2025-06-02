@@ -62,14 +62,14 @@
                                     android:orientation="horizontal">
 
                                     <ImageView
-                                        android:id="@+id/imageView17"
+                                        android:id="@+id/imageProfile"
                                         android:layout_width="72dp"
                                         android:layout_height="76dp"
                                         android:layout_weight="1"
                                         app:srcCompat="@drawable/ic_profiles" />
 
                                     <TextView
-                                        android:id="@+id/textView6"
+                                        android:id="@+id/textProfile"
                                         android:layout_width="257dp"
                                         android:layout_height="47dp"
                                         android:layout_marginTop="20dp"
@@ -461,7 +461,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView19"
+                                        android:id="@+id/textStatusTaman1"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/poppins_medium"
@@ -563,7 +563,7 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        android:id="@+id/textView20"
+                                        android:id="@+id/textStatusTaman2"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:fontFamily="@font/poppins_medium"

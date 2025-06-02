@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
@@ -28,6 +30,8 @@ public class DasboardActivity extends AppCompatActivity {
     private final String CITY_NAME = "Pelaihari";
 
     private TextView textCityName, textTemp, textDesc, textTemp1;
+
+    private TextView textStatusTaman1, textStatusTaman2;
     private ImageView imageWeather;
 
     private FirebaseDatabase database;
@@ -44,6 +48,9 @@ public class DasboardActivity extends AppCompatActivity {
         textDesc = findViewById(R.id.textDesc);
         imageWeather = findViewById(R.id.imageWeather);
 
+        // Inisialisasi textView Status
+        textStatusTaman1 = findViewById(R.id.textStatusTaman1);
+        textStatusTaman2 = findViewById(R.id.textStatusTaman2);
 
         // Inisialisasi TextView Sensor
         textCahaya = findViewById(R.id.textCahaya);
@@ -71,6 +78,7 @@ public class DasboardActivity extends AppCompatActivity {
                 Integer taman1 = snapshot.child("Kelembapan_Tanah").child("Taman_1").getValue(Integer.class);
                 if (taman1 != null) {
                     textTaman1.setText(taman1 + " %");
+                    updateStatusText(textStatusTaman1, taman1);
                 } else {
                     textTaman1.setText("Data tidak tersedia");
                 }
@@ -79,6 +87,7 @@ public class DasboardActivity extends AppCompatActivity {
                 Integer taman2 = snapshot.child("Kelembapan_Tanah").child("Taman_2").getValue(Integer.class);
                 if (taman2 != null) {
                     textTaman2.setText(taman2 + " %");
+                    updateStatusText(textStatusTaman2, taman2);
                 } else {
                     textTaman2.setText("Data tidak tersedia");
                 }
@@ -133,6 +142,28 @@ public class DasboardActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+    }
+
+    private void updateStatusText(TextView statusView, int value) {
+        statusView.setTypeface(ResourcesCompat.getFont(this, R.font.poppins_semibold));
+
+        if (value < 30) {
+            statusView.setText("Rendah");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        } else if (value < 50) {
+            statusView.setText("Minim");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        } else if (value <= 70) {
+            statusView.setText("Ideal");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        } else if (value <= 85) {
+            statusView.setText("Tinggi");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        } else {
+            statusView.setText("Tinggi");
+            statusView.setTextColor(getResources().getColor(android.R.color.white));
+        }
     }
     private void loadWeather() {
         WeatherService service = RetrofitInstance.getWeatherService();
