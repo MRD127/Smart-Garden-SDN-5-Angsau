@@ -1,6 +1,8 @@
 package com.example.smartgarden;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +15,12 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.File;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,39 +28,43 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class DasboardActivity extends AppCompatActivity {
-    private TextView textViewWeather;
-    private final String API_KEY = "47730936a35a0e34ea8ecbf7e9945d19"; // Ganti dengan API key Anda
-    private final String CITY_NAME = "Pelaihari";
-
     private TextView textCityName, textTemp, textDesc, textTemp1;
-
     private TextView textStatusTaman1, textStatusTaman2;
-    private ImageView imageWeather;
-
+    private ImageView imageWeather, imageProfile;
     private FirebaseDatabase database;
     private TextView textCahaya, textTaman1, textTaman2, textKelembabanUdara, textSuhuUdara;
+
+    private final String API_KEY = "47730936a35a0e34ea8ecbf7e9945d19";
+    private final String CITY_NAME = "Pelaihari";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dasboard);
-        // Inisialisasi TextView dan ImageView dari layout
+
+        // Inisialisasi view
         textCityName = findViewById(R.id.textCityName);
         textTemp = findViewById(R.id.textTemp);
         textTemp1 = findViewById(R.id.textTemp1);
         textDesc = findViewById(R.id.textDesc);
         imageWeather = findViewById(R.id.imageWeather);
+        imageProfile = findViewById(R.id.imageProfile); // Inisialisasi foto profil
 
-        // Inisialisasi textView Status
         textStatusTaman1 = findViewById(R.id.textStatusTaman1);
         textStatusTaman2 = findViewById(R.id.textStatusTaman2);
 
-        // Inisialisasi TextView Sensor
         textCahaya = findViewById(R.id.textCahaya);
         textTaman1 = findViewById(R.id.textTaman1);
         textTaman2 = findViewById(R.id.textTaman2);
         textKelembabanUdara = findViewById(R.id.textKelembabanUdara);
         textSuhuUdara = findViewById(R.id.textSuhuUdara);
+
+        // Load gambar profil dari internal storage
+        File file = new File(getFilesDir(), "profile_picture.png");
+        if (file.exists()) {
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            imageProfile.setImageBitmap(bitmap);
+        }
 
         // Inisialisasi Firebase
         database = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app");
@@ -66,47 +73,22 @@ public class DasboardActivity extends AppCompatActivity {
         sensorRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // Cahaya
                 Integer cahaya = snapshot.child("Cahaya").getValue(Integer.class);
-                if (cahaya != null) {
-                    textCahaya.setText(cahaya + " lx");
-                } else {
-                    textCahaya.setText("Data tidak tersedia");
-                }
+                textCahaya.setText(cahaya != null ? cahaya + " lx" : "Data tidak tersedia");
 
-                // Taman 1
                 Integer taman1 = snapshot.child("Kelembapan_Tanah").child("Taman_1").getValue(Integer.class);
-                if (taman1 != null) {
-                    textTaman1.setText(taman1 + " %");
-                    updateStatusText(textStatusTaman1, taman1);
-                } else {
-                    textTaman1.setText("Data tidak tersedia");
-                }
+                textTaman1.setText(taman1 != null ? taman1 + " %" : "Data tidak tersedia");
+                if (taman1 != null) updateStatusText(textStatusTaman1, taman1);
 
-                // Taman 2
                 Integer taman2 = snapshot.child("Kelembapan_Tanah").child("Taman_2").getValue(Integer.class);
-                if (taman2 != null) {
-                    textTaman2.setText(taman2 + " %");
-                    updateStatusText(textStatusTaman2, taman2);
-                } else {
-                    textTaman2.setText("Data tidak tersedia");
-                }
+                textTaman2.setText(taman2 != null ? taman2 + " %" : "Data tidak tersedia");
+                if (taman2 != null) updateStatusText(textStatusTaman2, taman2);
 
-                // Kelembaban Udara
                 Double kelembabanUdara = snapshot.child("Kelembapan_Udara").getValue(Double.class);
-                if (kelembabanUdara != null) {
-                    textKelembabanUdara.setText(kelembabanUdara + "%");
-                } else {
-                    textKelembabanUdara.setText("Data tidak tersedia");
-                }
+                textKelembabanUdara.setText(kelembabanUdara != null ? kelembabanUdara + "%" : "Data tidak tersedia");
 
-                // Suhu Udara
                 Double suhuUdara = snapshot.child("Suhu_Udara").getValue(Double.class);
-                if (suhuUdara != null) {
-                    textSuhuUdara.setText(suhuUdara + "°C");
-                } else {
-                    textSuhuUdara.setText("Data tidak tersedia");
-                }
+                textSuhuUdara.setText(suhuUdara != null ? suhuUdara + "°C" : "Data tidak tersedia");
             }
 
             @Override
@@ -118,31 +100,37 @@ public class DasboardActivity extends AppCompatActivity {
                 textSuhuUdara.setText("Gagal");
             }
         });
+
         loadWeather();
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                // Gunakan if-else untuk menghindari error "Constant expression required"
-                int id = item.getItemId();
-                if (id == R.id.home) {
-                    startActivity(new Intent(DasboardActivity.this, DasboardActivity.class));
-                    return true;
-                } else if (id == R.id.detail) {
-                    startActivity(new Intent(DasboardActivity.this, DetailActivity.class));
-                    return true;
-                } else if (id == R.id.history) {
-                    startActivity(new Intent(DasboardActivity.this, HistoryActivity.class));
-                    return true;
-                } else if (id == R.id.setting) {
-                    startActivity(new Intent(DasboardActivity.this, SettingActivity.class));
-                    return true;
-                }
-                return false;
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.home) {
+                startActivity(new Intent(DasboardActivity.this, DasboardActivity.class));
+                return true;
+            } else if (id == R.id.detail) {
+                startActivity(new Intent(DasboardActivity.this, DetailActivity.class));
+                return true;
+            } else if (id == R.id.history) {
+                startActivity(new Intent(DasboardActivity.this, HistoryActivity.class));
+                return true;
+            } else if (id == R.id.setting) {
+                startActivity(new Intent(DasboardActivity.this, SettingActivity.class));
+                return true;
             }
+            return false;
         });
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        File file = new File(getFilesDir(), "profile_picture.png");
+        if (file.exists()) {
+            Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            imageProfile.setImageBitmap(bitmap);
+        }
     }
 
     private void updateStatusText(TextView statusView, int value) {
@@ -150,21 +138,17 @@ public class DasboardActivity extends AppCompatActivity {
 
         if (value < 30) {
             statusView.setText("Rendah");
-            statusView.setTextColor(getResources().getColor(android.R.color.white));
         } else if (value < 50) {
             statusView.setText("Minim");
-            statusView.setTextColor(getResources().getColor(android.R.color.white));
         } else if (value <= 70) {
             statusView.setText("Ideal");
-            statusView.setTextColor(getResources().getColor(android.R.color.white));
-        } else if (value <= 85) {
-            statusView.setText("Tinggi");
-            statusView.setTextColor(getResources().getColor(android.R.color.white));
         } else {
             statusView.setText("Tinggi");
-            statusView.setTextColor(getResources().getColor(android.R.color.white));
         }
+
+        statusView.setTextColor(getResources().getColor(android.R.color.white));
     }
+
     private void loadWeather() {
         WeatherService service = RetrofitInstance.getWeatherService();
         Call<WeatherResponse> call = service.getWeather(CITY_NAME, API_KEY, "metric");
@@ -200,10 +184,7 @@ public class DasboardActivity extends AppCompatActivity {
     }
 
     private String capitalize(String str) {
-        if (str == null || str.length() == 0) return str;
+        if (str == null || str.isEmpty()) return str;
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 }
-
-
-
