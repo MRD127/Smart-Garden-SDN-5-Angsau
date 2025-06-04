@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -15,6 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class SettingActivity extends AppCompatActivity {
 
@@ -54,6 +56,15 @@ public class SettingActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Logout
+        Button logoutButton = findViewById(R.id.btn_logout);
+        logoutButton.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut(); // Sign out Firebase user
+            Intent intent = new Intent(SettingActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // clear stack
+            startActivity(intent);
+            finish();
+        });
 
         // Bottom Navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
