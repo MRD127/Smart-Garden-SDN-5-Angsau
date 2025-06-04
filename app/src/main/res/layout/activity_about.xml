@@ -35,15 +35,19 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_shapes" />
 
-            <!-- Judul Gambar "Tentang" -->
-            <ImageView
-                android:id="@+id/imageViewTitle"
-                android:layout_width="120dp"
-                android:layout_height="24dp"
+
+            <!-- Judul Teks "Tentang" -->
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="-80dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_about_text" />
+                android:text="About"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
         </LinearLayout>
 
         <!-- Tombol kembali -->

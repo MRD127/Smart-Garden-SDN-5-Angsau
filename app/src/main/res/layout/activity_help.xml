@@ -28,14 +28,18 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_shapes" />
 
-            <!-- Ganti teks header ke "Help" -->
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="112dp"
-                android:layout_height="29dp"
+            <!-- Judul Teks "Help" -->
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="-80dp"
-                app:srcCompat="@drawable/ic_help_text" />
+                android:text="Help"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
         </LinearLayout>
 
         <!-- Tombol kembali kanan atas -->
