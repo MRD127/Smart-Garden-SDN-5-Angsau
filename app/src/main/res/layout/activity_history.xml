@@ -33,9 +33,6 @@
             android:layout_marginTop="-80dp"
             app:srcCompat="@drawable/ic_history_text_page" />
 
-
-        <!-- Jika mau ada ImageView lain seperti imageView8, tambahkan di sini -->
-
     </LinearLayout>
 
     <!-- Scrollable Body -->
@@ -46,22 +43,11 @@
         android:fillViewport="true">
 
         <LinearLayout
+            android:id="@+id/historyContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
-
-            <!-- Contoh konten history kamu -->
-            <ImageView
-                android:id="@+id/imageView13"
-                android:layout_width="83dp"
-                android:layout_height="86dp"
-                android:layout_marginBottom="16dp"
-                android:src="@drawable/ic_profiles" />
-
-            <!-- Tambah konten lain sesuai kebutuhan -->
-
-        </LinearLayout>
+            android:padding="16dp"/>
     </ScrollView>
 
     <!-- Bottom Navigation -->
