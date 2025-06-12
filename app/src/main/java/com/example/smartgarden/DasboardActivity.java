@@ -1,11 +1,17 @@
 package com.example.smartgarden;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,6 +35,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import android.Manifest;
 
 public class DasboardActivity extends AppCompatActivity {
     private TextView textCityName, textTemp, textDesc, textTemp1;
@@ -44,6 +51,9 @@ public class DasboardActivity extends AppCompatActivity {
 
     private final String API_KEY = "47730936a35a0e34ea8ecbf7e9945d19";
     private final String CITY_NAME = "Pelaihari";
+
+    private boolean sudahNotifikasiTaman1 = false;
+    private boolean sudahNotifikasiTaman2 = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +115,24 @@ public class DasboardActivity extends AppCompatActivity {
         // Inisialisasi Firebase Realtime Database
         database = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app");
 
+        // Izin notif
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
+        }
+
+        // Notifikasi
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    "smart_garden_channel",
+                    "Smart Garden Notifikasi",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
         DatabaseReference sensorRef = database.getReference("Sensor");
         sensorRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -125,6 +153,36 @@ public class DasboardActivity extends AppCompatActivity {
 
                 Double suhuUdara = snapshot.child("Suhu_Udara").getValue(Double.class);
                 textSuhuUdara.setText(suhuUdara != null ? suhuUdara + "°C" : "Data tidak tersedia");
+
+                DatabaseReference relayRef = database.getReference("Control/Relay");
+                relayRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Boolean taman1 = snapshot.child("Taman_1").getValue(Boolean.class);
+                        Boolean taman2 = snapshot.child("Taman_2").getValue(Boolean.class);
+
+                        if (Boolean.TRUE.equals(taman1) && !sudahNotifikasiTaman1) {
+                            sendLocalNotification("Penyiraman Taman 1", "Sistem sedang menyiram Taman 1.");
+                            sudahNotifikasiTaman1 = true;
+                        } else if (Boolean.FALSE.equals(taman1)) {
+                            sudahNotifikasiTaman1 = false;
+                        }
+
+                        if (Boolean.TRUE.equals(taman2) && !sudahNotifikasiTaman2) {
+                            sendLocalNotification("Penyiraman Taman 2", "Sistem sedang menyiram Taman 2.");
+                            sudahNotifikasiTaman2 = true;
+                        } else if (Boolean.FALSE.equals(taman2)) {
+                            sudahNotifikasiTaman2 = false;
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Tambahkan log jika perlu
+                    }
+                });
+
             }
 
             @Override
@@ -218,6 +276,28 @@ public class DasboardActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void sendLocalNotification(String title, String message) {
+        // Cek apakah izin notifikasi telah diberikan
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (checkSelfPermission(Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                // Izin belum diberikan, jangan kirim notifikasi
+                return;
+            }
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "smart_garden_channel")
+                .setSmallIcon(R.drawable.splash_logo) // Ganti dengan ikon yang tersedia di drawable
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(100, builder.build());
+    }
+
+
 
     private String capitalize(String str) {
         if (str == null || str.isEmpty()) return str;
