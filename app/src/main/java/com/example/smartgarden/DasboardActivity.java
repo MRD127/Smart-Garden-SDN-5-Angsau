@@ -11,7 +11,6 @@ import androidx.core.content.res.ResourcesCompat;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,6 +19,10 @@ import java.io.File;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,6 +36,11 @@ public class DasboardActivity extends AppCompatActivity {
     private ImageView imageWeather, imageProfile;
     private FirebaseDatabase database;
     private TextView textCahaya, textTaman1, textTaman2, textKelembabanUdara, textSuhuUdara;
+
+    // FIRESTORE USERNAME
+    private TextView textUserName;
+    private FirebaseFirestore firestore;
+    private FirebaseUser currentUser;
 
     private final String API_KEY = "47730936a35a0e34ea8ecbf7e9945d19";
     private final String CITY_NAME = "Pelaihari";
@@ -59,6 +67,34 @@ public class DasboardActivity extends AppCompatActivity {
         textKelembabanUdara = findViewById(R.id.textKelembabanUdara);
         textSuhuUdara = findViewById(R.id.textSuhuUdara);
 
+        // FIRESTORE USERNAME - inisialisasi TextView untuk nama user
+        textUserName = findViewById(R.id.textUserName);
+        firestore = FirebaseFirestore.getInstance();
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        // Ambil nama user dari Firestore dan tampilkan
+        if (currentUser != null) {
+            firestore.collection("users").document(currentUser.getUid()).get()
+                    .addOnSuccessListener(document -> {
+                        if (document.exists()) {
+                            String name = document.getString("name");
+                            if (name != null && !name.isEmpty()) {
+                                textUserName.setText("Halo, " + name);
+                            } else {
+                                textUserName.setText("Halo, User");
+                            }
+                        } else {
+                            textUserName.setText("Halo, User");
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        textUserName.setText("Halo, User");
+                    });
+        } else {
+            textUserName.setText("Halo, Guest");
+        }
+        // END FIRESTORE USERNAME
+
         // Load gambar profil dari internal storage
         File file = new File(getFilesDir(), "profile_picture.png");
         if (file.exists()) {
@@ -66,7 +102,7 @@ public class DasboardActivity extends AppCompatActivity {
             imageProfile.setImageBitmap(bitmap);
         }
 
-        // Inisialisasi Firebase
+        // Inisialisasi Firebase Realtime Database
         database = FirebaseDatabase.getInstance("https://smart-garden-sdn-5-angsau-default-rtdb.asia-southeast1.firebasedatabase.app");
 
         DatabaseReference sensorRef = database.getReference("Sensor");
