@@ -61,7 +61,7 @@ public class DetailActivity extends AppCompatActivity {
         switchGardenButton.setOnClickListener(v -> toggleGarden());
 
         // Set teks awal tombol
-        switchGardenButton.setText("Taman 2 ➤");
+        switchGardenButton.setText("Taman 2 ->");
     }
 
     private void toggleGarden() {
@@ -69,10 +69,10 @@ public class DetailActivity extends AppCompatActivity {
 
         if (showingGarden1) {
             fragment = new DetailFragment2();
-            switchGardenButton.setText("⬅ Taman 1");
+            switchGardenButton.setText("<- Taman 1");
         } else {
             fragment = new DetailFragment();
-            switchGardenButton.setText("Taman 2 ➤");
+            switchGardenButton.setText("Taman 2 ->");
         }
 
         getSupportFragmentManager()
